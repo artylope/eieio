@@ -1,9 +1,7 @@
 import './globals.scss';
-import '@radix-ui/themes/styles.css';
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { Theme } from '@radix-ui/themes';
 import { Providers } from './providers';
 
 export const metadata = {
@@ -18,11 +16,9 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           {' '}
-          <Theme className="min-h-screen flex flex-col">
-            <Header />
-            {children}
-            <Footer />
-          </Theme>
+          <Header />
+          {children}
+          <Footer />
         </Providers>
       </body>
     </html>
