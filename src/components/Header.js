@@ -30,7 +30,8 @@ const Header = () => {
       <div className="container mx-auto">
         <div className="flex justify-between items-start py-8">
           <div className="font-special font-bold text-6xl max-w-2xl">
-            Exciting Explorations of Intuitive Interfaces
+            EIEIO <br />
+            Engaging and Intuitive Encyclopedia of Interfaces Online
           </div>
           <div className="flex gap-x-2 justify-between items-center">
             <Switch.Root

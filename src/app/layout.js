@@ -7,8 +7,9 @@ import { Theme } from '@radix-ui/themes';
 import { Providers } from './providers';
 
 export const metadata = {
-  title: 'Artylope | Exciting explorations of Intuitive UI',
-  description: 'Exciting explorations of Intuitive UI',
+  title:
+    'Artylope | EIEIO Engaging and Intuitive Encyclopedia of Interfaces Online',
+  description: 'Engaging and Intuitive Encyclopedia of Interfaces Online',
 };
 
 export default function RootLayout({ children }) {
