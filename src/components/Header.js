@@ -29,19 +29,19 @@ const Header = () => {
 
   return (
     <header className="bg-slate-50 border-b">
-      <div className="container mx-auto py-16 flex flex-col gap-y-4">
-        <div className="flex justify-between items-start gap-x-4">
-          <div className="flex justify-start items-center gap-x-6">
+      <div className="container mx-auto py-16 flex gap-y-4">
+        <div className="flex flex-col justify-between items-start gap-x-2">
+          <div className="flex flex-col  justify-start items-start gap-x-6">
             <Image src={Logo} className="w-48" />
             <div className="flex flex-col gap-y-2">
               <div className="font-bold text-4xl max-w-2xl text-slate-900">
                 Engaging and Intuitive Encyclopedia of Interactive Organisms
               </div>
-              <div>by Artylope</div>
+              <div className="mt-1">by Artylope</div>
             </div>
           </div>
 
-          <div className="flex gap-x-2 justify-between items-center">
+          <div className="flex gap-x-2 justify-between items-center mt-2">
             <Switch.Root
               className={`w-14 h-8 rounded-full border bg-slate-200 relative data-[state=checked]:bg-indigo-500 flex justify-start items-center data-[state=checked]:justify-end`}
               checked={theme === 'dark'}
