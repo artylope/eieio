@@ -1,5 +1,7 @@
 'use client';
 import React from 'react';
+import Image from 'next/image';
+import Logo from '@/image/eieio.svg';
 import { useTheme } from 'next-themes';
 
 import { Sun, MoonStars } from '@phosphor-icons/react';
@@ -28,10 +30,12 @@ const Header = () => {
   return (
     <header>
       <div className="container mx-auto">
-        <div className="flex justify-between items-start py-8">
-          <div className="font-special font-bold text-6xl max-w-2xl">
-            EIEIO <br />
-            Engaging and Intuitive Encyclopedia of Interfaces Online
+        <div
+          className="flex justify-between items-start py-12
+        ">
+          <div className="font-bold text-4xl max-w-xl text-slate-900">
+            <Image src={Logo} className="w-48 mb-5" />
+            Engaging and Intuitive Encyclopedia of Interactive Organisms{' '}
           </div>
           <div className="flex gap-x-2 justify-between items-center">
             <Switch.Root
