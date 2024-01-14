@@ -1,0 +1,20 @@
+import React from 'react';
+
+const Template = ({ title, subtitle, description, children }) => {
+  return (
+    <div className="py-8 flex flex-col gap-y-6 ">
+      <div className="flex flex-col gap-y-2">
+        <p className="font-semibold text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wide">
+          {subtitle}
+        </p>
+        <h2 className="font-semibold text-2xl text-slate-800 dark:text-slate-300">
+          {title}
+        </h2>{' '}
+        {/* <p className="text-slate-700">{description}</p> */}
+      </div>
+      <div className="grow">{children}</div>
+    </div>
+  );
+};
+
+export default Template;

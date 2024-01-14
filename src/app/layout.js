@@ -18,7 +18,7 @@ export default function RootLayout({ children }) {
       <body>
         <Providers>
           {' '}
-          <Theme>
+          <Theme className="min-h-screen flex flex-col">
             <Header />
             {children}
             <Footer />
