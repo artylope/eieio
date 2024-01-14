@@ -8,7 +8,8 @@ export default function Home() {
     <div className="flex grow py-8">
       <div className="container mx-auto grow">
         <Template
-          subtitle="Exercise 1"
+          subtitle="1"
+          date="14 Jan 2024"
           title="Slider and dynamic text display"
           description="The slider component that controls the text size with dynamic text input">
           <SliderDemo />
