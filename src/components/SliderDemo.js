@@ -21,8 +21,8 @@ const SliderDemo = () => {
   }
 
   return (
-    <div className="flex flex-col grow w-full gap-y-4 bg-white ">
-      <div className="flex flex-col lg:flex-row grow w-full border rounded dark:border-slate-800">
+    <div className="flex flex-col grow w-full gap-y-4 ">
+      <div className="flex flex-col lg:flex-row grow w-full bg-white dark:bg-neutral-900 border rounded dark:border-slate-800">
         <div className="flex flex-col justify-between border-b lg:border-r dark:border-slate-800 gap-y-12 lg:w-[40rem]  lg:min-w-96 p-8">
           <div className="flex flex-col gap-y-4">
             <label className="font-semibold text-slate-500 dark:text-slate-400 uppercase text-xs tracking-wide">

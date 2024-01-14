@@ -30,7 +30,7 @@ const Header = () => {
   return (
     <header className="bg-slate-50 border-b">
       <div className="container mx-auto py-16 flex flex-col gap-y-4">
-        <div className="flex justify-between items-center  gap-x-4">
+        <div className="flex justify-between items-start gap-x-4">
           <div className="flex justify-start items-center gap-x-6">
             <Image src={Logo} className="w-48" />
             <div className="flex flex-col gap-y-2">
@@ -43,7 +43,7 @@ const Header = () => {
 
           <div className="flex gap-x-2 justify-between items-center">
             <Switch.Root
-              className={`w-14 h-8 rounded-full bg-slate-100 relative shadow-inner data-[state=checked]:bg-indigo-500 flex justify-start items-center data-[state=checked]:justify-end`}
+              className={`w-14 h-8 rounded-full border bg-slate-200 relative data-[state=checked]:bg-indigo-500 flex justify-start items-center data-[state=checked]:justify-end`}
               checked={theme === 'dark'}
               onCheckedChange={handleSwitchTheme}>
               <Switch.Thumb className="absolute h-7 w-7 ml-0.5 mr-0.5 rounded-full bg-white border shadow-sm flex justify-center items-center data-[state=checked]:border-slate-700 data-[state=checked]:bg-slate-800">
