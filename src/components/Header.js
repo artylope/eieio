@@ -28,13 +28,13 @@ const Header = () => {
   }
 
   return (
-    <header>
+    <header className="bg-slate-100 border-b">
       <div className="container mx-auto">
         <div
           className="flex justify-between items-start py-12
         ">
           <div className="font-bold text-4xl max-w-xl text-slate-900">
-            <Image src={Logo} className="w-48 mb-5" />
+            <Image src={Logo} className="w-48" />
             Engaging and Intuitive Encyclopedia of Interactive Organisms{' '}
           </div>
           <div className="flex gap-x-2 justify-between items-center">
