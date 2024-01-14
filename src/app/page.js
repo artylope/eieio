@@ -10,7 +10,7 @@ export default function Home() {
         <Template
           subtitle="1"
           date="14 Jan 2024"
-          title="Slider and dynamic text display"
+          title="Slider to control text size and and dynamic text display"
           description="The slider component that controls the text size with dynamic text input">
           <SliderDemo />
         </Template>

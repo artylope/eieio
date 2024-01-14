@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 import * as Slider from '@radix-ui/react-slider';
 
 const SliderDemo = () => {
-  const [textSize, setTextSize] = useState(24);
+  const [textSize, setTextSize] = useState(88);
   const [sampleText, setSampleText] = useState(
     'The quick brown fox jumps over the lazy dog'
   );
