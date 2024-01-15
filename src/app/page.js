@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import TypographySlider from '@/app/exercises/TypographySlider';
+import SkeletonCard from './exercises/SkeletonCard';
 
 import Template from '@/app/exercises/Template';
 
@@ -13,6 +14,13 @@ export default function Home() {
           title="Slider to control text size and and dynamic text display"
           description="The slider component that controls the text size with dynamic text input">
           <TypographySlider />
+        </Template>
+        <Template
+          subtitle="1"
+          date="14 Jan 2024"
+          title="Slider to control text size and and dynamic text display"
+          description="The slider component that controls the text size with dynamic text input">
+          <SkeletonCard />
         </Template>
       </div>
     </div>
