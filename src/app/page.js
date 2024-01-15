@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import SliderDemo from '@/components/SliderDemo';
+import TypographySlider from '@/app/exercises/TypographySlider';
 
-import Template from '@/components/Template';
+import Template from '@/app/exercises/Template';
 
 export default function Home() {
   return (
@@ -12,7 +12,7 @@ export default function Home() {
           date="14 Jan 2024"
           title="Slider to control text size and and dynamic text display"
           description="The slider component that controls the text size with dynamic text input">
-          <SliderDemo />
+          <TypographySlider />
         </Template>
       </div>
     </div>
