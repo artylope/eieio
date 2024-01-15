@@ -22,8 +22,8 @@ const TypographySlider = () => {
 
   return (
     <div className="flex flex-col grow w-full gap-y-4 ">
-      <div className="flex flex-col lg:flex-row grow w-full bg-white dark:bg-zinc-900 border rounded dark:border-zinc-800">
-        <div className="flex flex-col justify-between border-b lg:border-r dark:border-zinc-800 gap-y-12 lg:w-[40rem]  lg:min-w-96 p-8">
+      <div className="flex flex-col lg:flex-row grow w-full bg-white dark:bg-zinc-900  rounded ">
+        <div className="flex flex-col justify-between border-b lg:border-b-transparent lg:border-r dark:border-zinc-800 gap-y-12 lg:w-[40rem]  lg:min-w-96 p-8">
           <div className="flex flex-col gap-y-4">
             <label className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
               Text size
