@@ -37,24 +37,39 @@ const SortableList = () => {
   };
 
   const handleAddItem = () => {
-    const newItem = 'untitled';
+    let newItem = 'untitled';
+    let suffix = 1;
+
+    while (items.includes(newItem)) {
+      newItem = `untitled ${suffix}`;
+      suffix += 1;
+    }
+
     setItems([...items, newItem]);
   };
 
   return (
     <div>
-      <button onClick={handleAddItem}>Add Item</button>
-      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-        <SortableContext items={items} strategy={verticalListSortingStrategy}>
-          <div className="p-12 flex flex-col">
-            {items.map((id) => (
-              <SortableItem key={id} id={id}>
-                {id}
-              </SortableItem>
-            ))}
-          </div>
-        </SortableContext>
-      </DndContext>
+      <div className=" flex flex-col m-1">
+        <DndContext
+          collisionDetection={closestCenter}
+          onDragEnd={handleDragEnd}>
+          <SortableContext items={items} strategy={verticalListSortingStrategy}>
+            <div className=" flex flex-col">
+              {items.map((id) => (
+                <SortableItem key={id} id={id}>
+                  {id}
+                </SortableItem>
+              ))}
+            </div>
+          </SortableContext>
+        </DndContext>
+        <button
+          className="justify-start items-center m-1  text-slate-700 w-80 h-11"
+          onClick={handleAddItem}>
+          Add Item
+        </button>
+      </div>
     </div>
   );
 };
