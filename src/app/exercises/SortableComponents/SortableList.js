@@ -48,6 +48,10 @@ const SortableList = () => {
     setItems([...items, newItem]);
   };
 
+  const handleRemoveItem = (id) => {
+    setItems(items.filter((item) => item !== id));
+  };
+
   const handleReorderItems = () => {
     const sortedItems = [...items].sort((a, b) =>
       a.localeCompare(b, undefined, { numeric: true })
@@ -76,7 +80,7 @@ const SortableList = () => {
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
             <div className=" flex flex-col">
               {items.map((id) => (
-                <SortableItem key={id} id={id}>
+                <SortableItem key={id} id={id} onRemove={handleRemoveItem}>
                   {id}
                 </SortableItem>
               ))}

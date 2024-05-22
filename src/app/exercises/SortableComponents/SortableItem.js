@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import { GripVertical } from 'lucide-react';
@@ -31,7 +30,6 @@ export function SortableItem(props) {
         {' '}
         <button
           className="z-50 h-8 w-8 flex justify-center items-center cursor-grab "
-          data-no-dnd="true"
           {...attributes}
           {...listeners}>
           <GripVertical className="text-slate-400 w-4 h-4 border-none" />
@@ -42,9 +40,8 @@ export function SortableItem(props) {
       </div>
       <button
         className="z-50 h-8 w-8 flex justify-center items-center mr-2"
-        data-no-dnd="true"
         onClick={() => {
-          console.log('click');
+          props.onRemove(props.id);
         }}>
         <X className="text-slate-400 w-4 h-4" />
       </button>
