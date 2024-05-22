@@ -31,7 +31,7 @@ export function SortableItem(props) {
       ref={setNodeRef}
       style={style}
       className={`flex justify-center items-center border rounded-md bg-white shadow-sm  text-zinc-700 w-full ${
-        isDragging ? 'border-indigo-500 border-2' : ''
+        isDragging ? 'border-zinc-900 border-2' : ''
       }`}>
       <div
         className={`flex grow justify-start items-center gap-2 relative p-2`}>
