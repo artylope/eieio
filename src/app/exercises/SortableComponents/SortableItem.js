@@ -25,19 +25,23 @@ export function SortableItem(props) {
       style={style}
       className={`flex  justify-center items-center m-1 border rounded-md bg-white shadow-sm cursor-grab text-slate-700 w-full ${
         isDragging ? 'border-indigo-500 border-2' : ''
-      }`}
-      {...attributes}
-      {...listeners}>
+      }`}>
       <div
         className={`px-2 py-2 flex grow justify-start items-center gap-2 relative`}>
         {' '}
-        <GripVertical className="text-slate-400 w-4 h-4" />
+        <button
+          className="z-50 h-8 w-8 flex justify-center items-center"
+          data-no-dnd="true"
+          {...attributes}
+          {...listeners}>
+          <GripVertical className="text-slate-400 w-4 h-4 border-none" />
+        </button>
         <span className="grow " data-no-dnd="true">
           {props.children}{' '}
         </span>{' '}
       </div>
       <button
-        className="z-50 h-8 w-8 flex justify-center items-center"
+        className="z-50 h-8 w-8 flex justify-center items-center mr-2"
         data-no-dnd="true"
         onClick={() => {
           console.log('click');
