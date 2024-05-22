@@ -23,14 +23,14 @@ export function SortableItem(props) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex  justify-center items-center m-1 border rounded-md bg-white shadow-sm cursor-grab text-slate-700 w-full ${
+      className={`flex  justify-center items-center m-1 border rounded-md bg-white shadow-sm  text-slate-700 w-full ${
         isDragging ? 'border-indigo-500 border-2' : ''
       }`}>
       <div
         className={`px-2 py-2 flex grow justify-start items-center gap-2 relative`}>
         {' '}
         <button
-          className="z-50 h-8 w-8 flex justify-center items-center"
+          className="z-50 h-8 w-8 flex justify-center items-center cursor-grab "
           data-no-dnd="true"
           {...attributes}
           {...listeners}>
