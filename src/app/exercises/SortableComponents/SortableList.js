@@ -10,7 +10,6 @@ import { SortableItem } from './SortableItem';
 import { ArrowUpDown, Plus } from 'lucide-react';
 
 const initialItems = [
-  '50',
   '100',
   '200',
   '300',
@@ -20,7 +19,6 @@ const initialItems = [
   '700',
   '800',
   '900',
-  '950',
 ];
 
 const SortableList = () => {
