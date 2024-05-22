@@ -48,9 +48,28 @@ const SortableList = () => {
     setItems([...items, newItem]);
   };
 
+  const handleReorderItems = () => {
+    const sortedItems = [...items].sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true })
+    );
+    setItems(sortedItems);
+  };
+
   return (
-    <div>
-      <div className=" flex flex-col m-1">
+    <div className="py-20">
+      <div className="max-w-md flex flex-col m-1">
+        <div className="flex gap-x-4 grow w-full">
+          <button
+            className="justify-start items-center m-1  text-slate-700 w-80 h-11"
+            onClick={handleAddItem}>
+            Add Item
+          </button>
+          <button
+            className="justify-start items-center m-1  text-slate-700 w-80 h-11"
+            onClick={handleReorderItems}>
+            Reorder Items
+          </button>
+        </div>
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}>
@@ -64,11 +83,6 @@ const SortableList = () => {
             </div>
           </SortableContext>
         </DndContext>
-        <button
-          className="justify-start items-center m-1  text-slate-700 w-80 h-11"
-          onClick={handleAddItem}>
-          Add Item
-        </button>
       </div>
     </div>
   );
