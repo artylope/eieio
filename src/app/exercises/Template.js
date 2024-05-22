@@ -10,7 +10,7 @@ const Template = ({ title, subtitle, description, date, children }) => {
         <h2 className="font-semibold text-2xl text-zinc-800 dark:text-zinc-300">
           {title}
         </h2>{' '}
-        {/* <p className="text-zinc-700">{description}</p> */}
+        <p className="text-zinc-500">{description}</p>
       </div>
       <div className="grow border rounded flex justify-center items-center w-full bg-zinc-50">
         {children}

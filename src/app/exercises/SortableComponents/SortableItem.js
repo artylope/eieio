@@ -30,21 +30,21 @@ export function SortableItem(props) {
     <div
       ref={setNodeRef}
       style={style}
-      className={`flex justify-center items-center border rounded-md bg-white shadow-sm  text-slate-700 w-full ${
+      className={`flex justify-center items-center border rounded-md bg-white shadow-sm  text-zinc-700 w-full ${
         isDragging ? 'border-indigo-500 border-2' : ''
       }`}>
       <div
         className={`flex grow justify-start items-center gap-2 relative p-2`}>
         {' '}
         <button
-          className="z-50 h-8 w-8 flex justify-center items-center cursor-grab rounded hover:bg-slate-100 "
+          className="z-50 h-8 w-8 flex justify-center items-center cursor-grab rounded hover:bg-zinc-100 "
           {...attributes}
           {...listeners}>
-          <GripVertical className="text-slate-400 w-4 h-4 border-none" />
+          <GripVertical className="text-zinc-400 w-4 h-4 border-none" />
         </button>
         <div
           className={`border-b p-1 w-full grow ${
-            props.isEditing ? ' border-slate-300' : 'border-transparent'
+            props.isEditing ? ' border-zinc-300' : 'border-transparent'
           }`}>
           {props.isEditing ? (
             <input
@@ -68,7 +68,7 @@ export function SortableItem(props) {
       </div>
 
       <button
-        className="z-50 h-8 w-8 flex justify-center items-center mr-2 text-transparent cursor-pointer rounded hover:text-slate-400 hover:bg-slate-100"
+        className="z-50 h-8 w-8 flex justify-center items-center mr-2 text-transparent cursor-pointer rounded hover:text-zinc-400 hover:bg-zinc-100"
         onClick={() => {
           props.onRemove(props.id);
         }}>

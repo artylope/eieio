@@ -74,7 +74,7 @@ const SortableList = () => {
       <div className="flex flex-col gap-y-2 max-w-xl mx-auto">
         <div className="w-full grow flex justify-end">
           <button
-            className="h-12 w-fit flex bg-white shadow-sm justify-start items-center cursor-pointer rounded-md text-slate-600 border gap-x-2 px-4 hover:text-slate-900 hover:bg-slate-100"
+            className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border border-zinc-300 gap-x-2 px-4 hover:text-zinc-700 hover:bg-zinc-100"
             onClick={handleReorderItems}>
             <ArrowUpDown className=" w-4 h-4" /> Reorder
           </button>
@@ -101,7 +101,7 @@ const SortableList = () => {
             </div>
           </SortableContext>
           <button
-            className="h-12 w-1/2 flex bg-white shadow-sm justify-start items-center cursor-pointer rounded-md text-slate-600 border gap-x-2 px-4 hover:text-slate-900 hover:bg-slate-100"
+            className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-white hover:bg-zinc-800"
             onClick={handleAddItem}>
             <Plus className=" w-4 h-4" /> Add Item
           </button>
