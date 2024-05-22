@@ -7,6 +7,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
+import { ArrowUpDown, Plus } from 'lucide-react';
 
 const initialItems = [
   '50',
@@ -24,6 +25,8 @@ const initialItems = [
 
 const SortableList = () => {
   const [items, setItems] = useState(initialItems);
+  const [editingItem, setEditingItem] = useState(null);
+  const [newText, setNewText] = useState('');
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -59,33 +62,51 @@ const SortableList = () => {
     setItems(sortedItems);
   };
 
+  const handleChangeItem = (id) => {
+    setEditingItem(id);
+    setNewText(items.find((item) => item === id));
+  };
+
+  const handleConfirmChange = () => {
+    setItems(items.map((item) => (item === editingItem ? newText : item)));
+    setEditingItem(null);
+  };
   return (
-    <div className="py-20">
-      <div className="max-w-md flex flex-col m-1">
-        <div className="flex gap-x-4 grow w-full">
+    <div className="p-8 w-full">
+      <div className="flex flex-col gap-y-2 max-w-xl mx-auto">
+        <div className="w-full grow flex justify-end">
           <button
-            className="justify-start items-center m-1  text-slate-700 w-80 h-11"
-            onClick={handleAddItem}>
-            Add Item
-          </button>
-          <button
-            className="justify-start items-center m-1  text-slate-700 w-80 h-11"
+            className="h-12 w-fit flex bg-white shadow-sm justify-start items-center cursor-pointer rounded-md text-slate-600 border gap-x-2 px-4 hover:text-slate-900 hover:bg-slate-100"
             onClick={handleReorderItems}>
-            Reorder Items
+            <ArrowUpDown className=" w-4 h-4" /> Reorder
           </button>
         </div>
+
         <DndContext
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}>
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
-            <div className=" flex flex-col">
+            <div className="grow w-full flex flex-col gap-y-2">
               {items.map((id) => (
-                <SortableItem key={id} id={id} onRemove={handleRemoveItem}>
+                <SortableItem
+                  key={id}
+                  id={id}
+                  isEditing={editingItem === id}
+                  newText={newText}
+                  onEditTextChange={setNewText}
+                  onConfirmChange={handleConfirmChange}
+                  onRemove={handleRemoveItem}
+                  onChange={handleChangeItem}>
                   {id}
                 </SortableItem>
               ))}
             </div>
           </SortableContext>
+          <button
+            className="h-12 w-1/2 flex bg-white shadow-sm justify-start items-center cursor-pointer rounded-md text-slate-600 border gap-x-2 px-4 hover:text-slate-900 hover:bg-slate-100"
+            onClick={handleAddItem}>
+            <Plus className=" w-4 h-4" /> Add Item
+          </button>
         </DndContext>
       </div>
     </div>

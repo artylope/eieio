@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import TypographySlider from '@/app/exercises/TypographySlider';
 import SkeletonCard from './exercises/SkeletonCard';
-import DragAndDrop from './exercises/DragAndDrop';
 import Sortable from './exercises/Sortable';
 
 import Template from '@/app/exercises/Template';
@@ -24,13 +23,7 @@ export default function Home() {
           description="Card loading skeleton until the content is ready and loaded">
           <SkeletonCard />
         </Template>
-        <Template
-          subtitle="4"
-          date="22 May 2024"
-          title="Drag and Drop"
-          description="Drag and Drop">
-          <DragAndDrop />
-        </Template>
+
         <Template
           subtitle="4"
           date="22 May 2024"
