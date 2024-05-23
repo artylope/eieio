@@ -47,15 +47,14 @@ const Downloader = () => {
 
     const interval = setInterval(() => {
       currentSize += incrementSize;
-      setFileSizeDownloaded((prev) => {
-        if (prev + incrementSize >= totalSize) {
-          clearInterval(interval);
-          setIsDownloadComplete(true);
-          return totalSize;
-        }
-        return currentSize;
-      });
+      setFileSizeDownloaded(currentSize);
+      if (currentSize >= totalSize) {
+        clearInterval(interval);
+        setIsDownloadComplete(true);
+      }
     }, updateInterval);
+
+    return () => clearInterval(interval); // Clear interval on unmount
   };
 
   return (
@@ -75,6 +74,7 @@ const Downloader = () => {
           <DownloadToast
             fileSizeDownloaded={fileSizeDownloaded}
             totalSize={totalSize}
+            open={showToast}
           />
         )}
       </div>

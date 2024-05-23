@@ -2,7 +2,7 @@ import * as Toast from '@radix-ui/react-toast';
 import { motion } from 'framer-motion';
 import { Check, File } from 'lucide-react';
 
-const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
+const DownloadToast = ({ fileSizeDownloaded, totalSize, open }) => {
   const progress = (fileSizeDownloaded / totalSize) * 100;
   const radius = 16; // radius of the circle
   const circumference = 2 * Math.PI * radius;
@@ -11,7 +11,7 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
     <Toast.Provider swipeDirection="down">
       <Toast.Root
         className="w-[24rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8"
-        open={true}>
+        open={open}>
         {progress < 100 ? (
           <div className="flex items-center space-x-3">
             <motion.div
