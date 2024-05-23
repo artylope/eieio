@@ -83,7 +83,7 @@ export function SortableItem(props) {
           <GripVertical className="text-zinc-400 w-4 h-4 border-none" />
         </button>
         <div
-          className={`border-b p-1 w-full grow ${
+          className={`border-b p-1 w-full grow cursor-text ${
             props.isEditing ? ' border-zinc-300' : 'border-transparent'
           }`}>
           {props.isEditing ? (
@@ -100,7 +100,9 @@ export function SortableItem(props) {
               }}
             />
           ) : (
-            <span className="grow" onClick={() => props.onChange(props.id)}>
+            <span
+              className="grow w-full flex"
+              onClick={() => props.onChange(props.id)}>
               {props.children}
             </span>
           )}
