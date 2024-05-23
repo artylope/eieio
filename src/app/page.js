@@ -25,7 +25,7 @@ export default function Home() {
         </Template>
 
         <Template
-          subtitle="4"
+          subtitle="3"
           date="22 May 2024"
           title="Drag and Drop Sortable List"
           description="Manage a list of item - create, edit, delete and reorder in the way you want it.">
