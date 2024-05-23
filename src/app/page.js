@@ -2,7 +2,7 @@ import Image from 'next/image';
 import TypographySlider from '@/app/exercises/TypographySlider';
 import SkeletonCard from './exercises/SkeletonCard';
 import Sortable from './exercises/Sortable';
-
+import Downloader from './exercises/Downloader';
 import Template from '@/app/exercises/Template';
 
 export default function Home() {
@@ -30,6 +30,13 @@ export default function Home() {
           title="Drag and Drop Sortable List"
           description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it.">
           <Sortable />
+        </Template>
+        <Template
+          subtitle="4"
+          date="23 May 2024"
+          title="Download Feedback"
+          description="Delight your customers with a nice download effect">
+          <Downloader />
         </Template>
       </div>
     </div>
