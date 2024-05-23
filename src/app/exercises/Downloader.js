@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Download } from 'lucide-react';
 import DownloadToast from './Downloader/DownloadToast';
+import { AnimatePresence } from 'framer-motion';
 
 const Downloader = () => {
   const [showToast, setShowToast] = useState(false);
@@ -70,13 +71,16 @@ const Downloader = () => {
       </button>
 
       <div className="absolute bottom-0 mb-4">
-        {showToast && (
-          <DownloadToast
-            fileSizeDownloaded={fileSizeDownloaded}
-            totalSize={totalSize}
-            open={showToast}
-          />
-        )}
+        <AnimatePresence
+          onExitComplete={() => setShowToast(false)} // Ensure state changes only after exit animation
+        >
+          {showToast && (
+            <DownloadToast
+              fileSizeDownloaded={fileSizeDownloaded}
+              totalSize={totalSize}
+            />
+          )}{' '}
+        </AnimatePresence>
       </div>
     </div>
   );
