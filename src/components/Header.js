@@ -2,7 +2,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Logo from '@/image/eieio.svg';
-import DarkModeToggle from '@/components/DarkModeToggle';
+// import DarkModeToggle from '@/components/DarkModeToggle';
 
 const Header = () => {
   return (
@@ -23,9 +23,9 @@ const Header = () => {
             </div>
           </div>
 
-          <div className="flex gap-x-2 justify-between items-center mt-2 md:mt-0">
+          {/* <div className="flex gap-x-2 justify-between items-center mt-2 md:mt-0">
             <DarkModeToggle />
-          </div>
+          </div> */}
         </div>
       </div>
     </header>
