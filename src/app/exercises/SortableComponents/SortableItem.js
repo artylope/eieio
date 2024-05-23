@@ -1,7 +1,8 @@
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical, X } from 'lucide-react';
-import { useEffect, useRef } from 'react';
+import { GripVertical, EllipsisVertical } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import SortablePopover from './SortablePopover';
 
 export function SortableItem(props) {
   const {
@@ -12,6 +13,8 @@ export function SortableItem(props) {
     transition,
     isDragging,
   } = useSortable({ id: props.id });
+
+  const [showPopover, setShowPopover] = useState(false);
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -25,6 +28,23 @@ export function SortableItem(props) {
       inputRef.current.focus();
     }
   }, [props.isEditing]);
+
+  useEffect(() => {
+    if (props.isOpen) {
+      setShowPopover(true);
+    } else {
+      setShowPopover(false);
+    }
+  }, [props.isOpen]);
+
+  const togglePopover = () => {
+    if (!showPopover) {
+      props.onTogglePopover(props.id);
+    } else {
+      setShowPopover(false);
+      props.onTogglePopover(null);
+    }
+  };
 
   return (
     <div
@@ -67,13 +87,32 @@ export function SortableItem(props) {
         </div>
       </div>
 
-      <button
-        className="z-50 h-8 w-8 flex justify-center items-center mr-2 text-transparent cursor-pointer rounded hover:text-zinc-400 hover:bg-zinc-100"
-        onClick={() => {
-          props.onRemove(props.id);
-        }}>
-        <X className=" w-4 h-4" />
-      </button>
+      <div className="mr-2 relative">
+        <button
+          className="z-50 h-8 w-8 flex justify-center items-center  cursor-pointer rounded text-zinc-400 hover:bg-zinc-100"
+          onClick={togglePopover}>
+          <EllipsisVertical className=" w-4 h-4" />
+        </button>
+        {/* Popover component */}
+        {showPopover && (
+          <SortablePopover
+            onRemove={() => {
+              props.onRemove(props.id);
+              setShowPopover(false);
+              props.onTogglePopover(null);
+            }}
+            onDuplicate={() => {
+              props.onDuplicate(props.id);
+              setShowPopover(false);
+              props.onTogglePopover(null);
+            }}
+            onClose={() => {
+              setShowPopover(false);
+              props.onTogglePopover(null);
+            }}
+          />
+        )}
+      </div>
     </div>
   );
 }

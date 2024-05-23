@@ -25,6 +25,7 @@ const SortableList = () => {
   const [items, setItems] = useState(initialItems);
   const [editingItem, setEditingItem] = useState(null);
   const [newText, setNewText] = useState('');
+  const [popoverItem, setPopoverItem] = useState(null);
 
   const handleDragEnd = (event) => {
     const { active, over } = event;
@@ -53,6 +54,22 @@ const SortableList = () => {
     setItems(items.filter((item) => item !== id));
   };
 
+  const handleDuplicateItem = (id) => {
+    const newItems = [...items];
+    const index = newItems.indexOf(id);
+    let newItem = `${id} copy`;
+    let suffix = 1;
+
+    while (newItems.includes(newItem)) {
+      newItem = `${id} copy ${suffix}`;
+      suffix += 1;
+    }
+
+    newItems.splice(index + 1, 0, newItem);
+    setItems(newItems);
+    setPopoverItem(null); // Close the popover when item is duplicated
+  };
+
   const handleReorderItems = () => {
     const sortedItems = [...items].sort((a, b) =>
       a.localeCompare(b, undefined, { numeric: true })
@@ -69,14 +86,24 @@ const SortableList = () => {
     setItems(items.map((item) => (item === editingItem ? newText : item)));
     setEditingItem(null);
   };
+
+  const handleTogglePopover = (id) => {
+    setPopoverItem(popoverItem === id ? null : id);
+  };
+
   return (
     <div className="p-8 w-full">
       <div className="flex flex-col gap-y-2 max-w-xl mx-auto">
-        <div className="w-full grow flex justify-end">
+        <div className="w-full grow flex justify-end gap-x-2">
           <button
-            className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border border-zinc-300 gap-x-2 px-4 hover:text-zinc-700 hover:bg-zinc-100"
+            className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-zinc-700 hover:bg-zinc-100"
             onClick={handleReorderItems}>
             <ArrowUpDown className=" w-4 h-4" /> Reorder
+          </button>
+          <button
+            className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-white hover:bg-zinc-800"
+            onClick={handleAddItem}>
+            <Plus className=" w-4 h-4" /> Add Item
           </button>
         </div>
 
@@ -94,17 +121,15 @@ const SortableList = () => {
                   onEditTextChange={setNewText}
                   onConfirmChange={handleConfirmChange}
                   onRemove={handleRemoveItem}
-                  onChange={handleChangeItem}>
+                  onDuplicate={handleDuplicateItem}
+                  onChange={handleChangeItem}
+                  onTogglePopover={handleTogglePopover}
+                  isOpen={popoverItem === id}>
                   {id}
                 </SortableItem>
               ))}
             </div>
           </SortableContext>
-          <button
-            className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-white hover:bg-zinc-800"
-            onClick={handleAddItem}>
-            <Plus className=" w-4 h-4" /> Add Item
-          </button>
         </DndContext>
       </div>
     </div>
