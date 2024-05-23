@@ -59,8 +59,8 @@ const Downloader = () => {
   };
 
   return (
-    <div className="flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-12">
-      <p className="italic text-sm text-zinc-600">
+    <div className="p-4 flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-12">
+      <p className="italic text-sm text-zinc-600 text-center">
         This is a demo. No real file is <s>harmed</s> downloaded in the process.
       </p>
       <button

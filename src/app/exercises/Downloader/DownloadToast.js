@@ -25,7 +25,7 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
       <Toast.Root
         asChild
         open
-        className="w-[24rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8">
+        className="w-[20rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8">
         <motion.div
           variants={toastVariants}
           initial="hidden"
