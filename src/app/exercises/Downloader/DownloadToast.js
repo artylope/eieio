@@ -1,5 +1,5 @@
 import * as Toast from '@radix-ui/react-toast';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 import { Check, File } from 'lucide-react';
 
 const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
