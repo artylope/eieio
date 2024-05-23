@@ -10,7 +10,11 @@ const Header = () => {
       <div className="container mx-auto py-16 flex flex-col gap-y-4 ">
         <div className="flex flex-col md:flex-row justify-between items-start grow gap-x-3">
           <div className="flex flex-col md:flex-row  justify-start items-start gap-x-6">
-            <Image src={Logo} className="w-48" />
+            <Image
+              src={Logo}
+              className="w-48"
+              alt="EIEIO - Logo of Engaging and Intuitive Encyclopedia of Interactive Organisms"
+            />
             <div className="flex flex-col gap-y-2">
               <div className="font-semibold text-4xl max-w-2xl text-zinc-900">
                 Engaging and Intuitive Encyclopedia of Interactive Organisms

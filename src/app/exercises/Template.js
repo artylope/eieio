@@ -12,12 +12,10 @@ const Template = ({
     return (
       <>
         {libraries.map((library, index) => (
-          <div className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex justify-center item-center px-2 py-1 text-sm rounded">
-            <a
-              key={index}
-              href={library.link}
-              target="_blank"
-              rel="noopener noreferrer">
+          <div
+            key={index}
+            className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex justify-center item-center px-2 py-1 text-sm rounded">
+            <a href={library.link} target="_blank" rel="noopener noreferrer">
               {library.name}
             </a>
           </div>
