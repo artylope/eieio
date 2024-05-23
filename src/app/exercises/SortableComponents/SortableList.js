@@ -7,7 +7,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { SortableItem } from './SortableItem';
-import { ArrowUpDown, Plus } from 'lucide-react';
+import { ArrowDownAZ, Plus } from 'lucide-react';
 
 const initialItems = [
   '100',
@@ -98,7 +98,7 @@ const SortableList = () => {
           <button
             className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-zinc-700 hover:bg-zinc-100"
             onClick={handleReorderItems}>
-            <ArrowUpDown className=" w-4 h-4" /> Sort by name
+            <ArrowDownAZ className=" w-4 h-4" /> Sort by name
           </button>
           <button
             className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-white hover:bg-zinc-800"
