@@ -25,14 +25,14 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
       <Toast.Root
         asChild
         open
-        className="w-[20rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8">
+        className="grow min-w-[20rem] lg:w-[24rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8">
         <motion.div
           variants={toastVariants}
           initial="hidden"
           animate="visible"
           exit="exit">
           {progress < 100 ? (
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-3 grow">
               <motion.div
                 className="relative flex justify-center items-center"
                 style={{ width: 40, height: 40 }}>

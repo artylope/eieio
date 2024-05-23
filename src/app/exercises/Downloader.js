@@ -59,7 +59,7 @@ const Downloader = () => {
   };
 
   return (
-    <div className="p-4 flex flex-col w-full h-[22rem] justify-center items-center relative gap-y-6 -mt-12">
+    <div className="p-4 flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-12">
       <p className="italic text-sm text-zinc-600 text-center">
         This is a demo. No real file is <s>harmed</s> downloaded in the process.
       </p>
@@ -70,7 +70,7 @@ const Downloader = () => {
         <span className="px-2">Download</span>
       </button>
 
-      <div className="absolute bottom-0 mb-4">
+      <div className="absolute bottom-0 mb-4 flex grow w-full justify-center items-end">
         <AnimatePresence
           onExitComplete={() => setShowToast(false)} // Ensure state changes only after exit animation
         >
