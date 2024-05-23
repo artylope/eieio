@@ -15,6 +15,7 @@ export function SortableItem(props) {
   } = useSortable({ id: props.id });
 
   const [showPopover, setShowPopover] = useState(false);
+  const popoverRef = useRef(null);
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -36,6 +37,25 @@ export function SortableItem(props) {
       setShowPopover(false);
     }
   }, [props.isOpen]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+        setShowPopover(false);
+        props.onTogglePopover(null);
+      }
+    };
+
+    if (showPopover) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [showPopover, props]);
 
   const togglePopover = () => {
     if (!showPopover) {
@@ -95,22 +115,24 @@ export function SortableItem(props) {
         </button>
         {/* Popover component */}
         {showPopover && (
-          <SortablePopover
-            onRemove={() => {
-              props.onRemove(props.id);
-              setShowPopover(false);
-              props.onTogglePopover(null);
-            }}
-            onDuplicate={() => {
-              props.onDuplicate(props.id);
-              setShowPopover(false);
-              props.onTogglePopover(null);
-            }}
-            onClose={() => {
-              setShowPopover(false);
-              props.onTogglePopover(null);
-            }}
-          />
+          <div ref={popoverRef}>
+            <SortablePopover
+              onRemove={() => {
+                props.onRemove(props.id);
+                setShowPopover(false);
+                props.onTogglePopover(null);
+              }}
+              onDuplicate={() => {
+                props.onDuplicate(props.id);
+                setShowPopover(false);
+                props.onTogglePopover(null);
+              }}
+              onClose={() => {
+                setShowPopover(false);
+                props.onTogglePopover(null);
+              }}
+            />{' '}
+          </div>
         )}
       </div>
     </div>
