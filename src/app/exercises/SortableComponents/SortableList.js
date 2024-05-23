@@ -94,16 +94,17 @@ const SortableList = () => {
   return (
     <div className="p-8 w-full">
       <div className="flex flex-col gap-y-2 max-w-xl mx-auto">
-        <div className="w-full grow flex justify-end gap-x-2">
+        <div className="w-full grow flex justify-end gap-x-2 ">
           <button
-            className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-zinc-700 hover:bg-zinc-100"
+            className="h-12 w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-0.5 px-4 hover:text-zinc-700 hover:bg-zinc-100 "
             onClick={handleReorderItems}>
-            <ArrowDownAZ className=" w-4 h-4" /> Sort by name
+            <ArrowDownAZ className=" w-4 h-4" />{' '}
+            <span className="px-2">Sort by name</span>
           </button>
           <button
-            className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-2 px-4 hover:text-white hover:bg-zinc-800"
+            className="h-12 w-fit flex bg-zinc-900 text-zinc-50 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-0.5 px-4 hover:text-white hover:bg-zinc-800"
             onClick={handleAddItem}>
-            <Plus className=" w-4 h-4" /> Add Item
+            <Plus className=" w-4 h-4" /> <span className="px-2">Add item</span>
           </button>
         </div>
 
