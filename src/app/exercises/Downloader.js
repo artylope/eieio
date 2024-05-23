@@ -59,13 +59,17 @@ const Downloader = () => {
   };
 
   return (
-    <div className="flex w-full h-[20rem] justify-center items-center relative">
+    <div className="flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-12">
+      <p className="italic text-sm text-zinc-600">
+        *This is a demo, it does not really download a file.
+      </p>
       <button
         className="px-4 py-3 flex justify-center items-center rounded-md bg-zinc-900 text-zinc-50 gap-x-0.5 hover:bg-zinc-800 hover:text-white"
         onClick={handleDownloadClick}>
         <Download className="w-5 h-5" />
         <span className="px-2">Download</span>
       </button>
+
       <div className="absolute bottom-0 mb-4">
         {showToast && (
           <DownloadToast

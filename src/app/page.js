@@ -35,7 +35,7 @@ export default function Home() {
           subtitle="4"
           date="23 May 2024"
           title="Download Feedback"
-          description="Delight your customers with a nice download effect">
+          description="Delight your customers with a nice download effect.">
           <Downloader />
         </Template>
       </div>
