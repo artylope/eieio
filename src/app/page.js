@@ -45,7 +45,7 @@ export default function Home() {
             subtitle="3"
             date="22 May 2024"
             title="Drag and Drop Sortable List"
-            description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it. And with animation!"
+            description="Drag and drop items to manage your list. Create, rename, delete, duplicate, and reorder items exactly how you want. Enjoy smooth animations as you organise!"
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
