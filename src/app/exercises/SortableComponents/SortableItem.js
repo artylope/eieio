@@ -3,6 +3,7 @@ import { CSS } from '@dnd-kit/utilities';
 import { GripVertical, EllipsisVertical } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
 import SortablePopover from './SortablePopover';
+import { AnimatePresence } from 'framer-motion';
 
 export function SortableItem(props) {
   const {
@@ -116,26 +117,28 @@ export function SortableItem(props) {
           <EllipsisVertical className=" w-4 h-4" />
         </button>
         {/* Popover component */}
-        {showPopover && (
-          <div ref={popoverRef}>
-            <SortablePopover
-              onRemove={() => {
-                props.onRemove(props.id);
-                setShowPopover(false);
-                props.onTogglePopover(null);
-              }}
-              onDuplicate={() => {
-                props.onDuplicate(props.id);
-                setShowPopover(false);
-                props.onTogglePopover(null);
-              }}
-              onClose={() => {
-                setShowPopover(false);
-                props.onTogglePopover(null);
-              }}
-            />{' '}
-          </div>
-        )}
+        <AnimatePresence>
+          {showPopover && (
+            <div ref={popoverRef}>
+              <SortablePopover
+                onRemove={() => {
+                  props.onRemove(props.id);
+                  setShowPopover(false);
+                  props.onTogglePopover(null);
+                }}
+                onDuplicate={() => {
+                  props.onDuplicate(props.id);
+                  setShowPopover(false);
+                  props.onTogglePopover(null);
+                }}
+                onClose={() => {
+                  setShowPopover(false);
+                  props.onTogglePopover(null);
+                }}
+              />{' '}
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </div>
   );
