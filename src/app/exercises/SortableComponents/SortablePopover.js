@@ -1,5 +1,5 @@
 import React from 'react';
-import { X, Copy, Scale } from 'lucide-react';
+import { Trash, Copy } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const SortablePopover = ({ onRemove, onDuplicate, onClose }) => {
@@ -35,18 +35,18 @@ const SortablePopover = ({ onRemove, onDuplicate, onClose }) => {
       <button
         className="px-3 py-2 w-full flex justify-start items-center  cursor-pointer rounded text-zinc-500 hover:bg-zinc-100 gap-x-2"
         onClick={() => {
-          onRemove();
-          onClose();
-        }}>
-        <X className=" w-4 h-4" /> Delete
-      </button>
-      <button
-        className="px-3 py-2 w-full flex justify-start items-center  cursor-pointer rounded text-zinc-500 hover:bg-zinc-100 gap-x-2"
-        onClick={() => {
           onDuplicate();
           onClose();
         }}>
         <Copy className=" w-4 h-4" /> Duplicate
+      </button>
+      <button
+        className="px-3 py-2 w-full flex justify-start items-center  cursor-pointer rounded text-red-500 hover:bg-zinc-100 gap-x-2"
+        onClick={() => {
+          onRemove();
+          onClose();
+        }}>
+        <Trash className=" w-4 h-4" /> Delete
       </button>
     </motion.div>
   );
