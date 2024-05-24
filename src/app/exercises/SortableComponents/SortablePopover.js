@@ -31,7 +31,7 @@ const SortablePopover = ({ onRemove, onDuplicate, onClose }) => {
       initial="hidden"
       animate="visible"
       exit="exit"
-      className="z-50 origin-top-left absolute top-9 left-0 bg-white border shadow-md w-[12rem] rounded p-2 flex flex-col justify-start gap-y-2">
+      className="z-50 origin-top-right lg:origin-top-left absolute top-9 -left-[12rem] lg:left-0 bg-white border shadow-md w-[12rem] rounded p-2 flex flex-col justify-start gap-y-2">
       <button
         className="px-3 py-2 w-full flex justify-start items-center  cursor-pointer rounded text-zinc-500 hover:bg-zinc-100 gap-x-2"
         onClick={() => {
