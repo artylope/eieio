@@ -71,7 +71,7 @@ const Downloader = () => {
   };
 
   return (
-    <div className="p-4 flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-12 ">
+    <div className="p-4 flex flex-col w-full h-[20rem] justify-center items-center relative gap-y-6 -mt-8 ">
       <button
         className="relative px-4 py-3 flex justify-center items-center rounded-md bg-zinc-900 text-zinc-50 gap-x-0.5 hover:bg-zinc-800 hover:text-white disabled:bg-zinc-300"
         onClick={handleDownloadClick}
