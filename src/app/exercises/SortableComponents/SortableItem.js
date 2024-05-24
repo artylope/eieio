@@ -67,6 +67,22 @@ export function SortableItem(props) {
     }
   };
 
+  const handleRemove = () => {
+    setShowPopover(false);
+    setTimeout(() => {
+      props.onRemove(props.id);
+      props.onTogglePopover(null);
+    }, 500); // Delay to allow exit animation to complete
+  };
+
+  const handleDuplicate = () => {
+    setShowPopover(false);
+    setTimeout(() => {
+      props.onDuplicate(props.id);
+      props.onTogglePopover(null);
+    }, 500); // Delay to allow exit animation to complete
+  };
+
   return (
     <div
       ref={setNodeRef}
@@ -121,19 +137,13 @@ export function SortableItem(props) {
           {showPopover && (
             <div ref={popoverRef}>
               <SortablePopover
-                onRemove={() => {
-                  props.onRemove(props.id);
-                  setShowPopover(false);
-                  props.onTogglePopover(null);
-                }}
-                onDuplicate={() => {
-                  props.onDuplicate(props.id);
-                  setShowPopover(false);
-                  props.onTogglePopover(null);
-                }}
+                onRemove={handleRemove}
+                onDuplicate={handleDuplicate}
                 onClose={() => {
                   setShowPopover(false);
-                  props.onTogglePopover(null);
+                  setTimeout(() => {
+                    props.onTogglePopover(null);
+                  }, 500); // Delay to allow exit animation to complete
                 }}
               />{' '}
             </div>
