@@ -1,18 +1,26 @@
 import * as Toast from '@radix-ui/react-toast';
 import { motion } from 'framer-motion';
-import { Check, File } from 'lucide-react';
+import { Check, File, X } from 'lucide-react';
 
-const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
+const DownloadToast = ({ fileSizeDownloaded, totalSize, handleCancel }) => {
   const progress = (fileSizeDownloaded / totalSize) * 100;
   const radius = 16; // radius of the circle
   const circumference = 2 * Math.PI * radius;
 
   const toastVariants = {
-    hidden: { opacity: 0, y: 100 },
+    hidden: {
+      opacity: 0,
+      x: 0,
+      y: -80,
+      transition: { type: 'inertia', velocity: 50 },
+      scale: 0.1,
+    },
     visible: {
       opacity: 1,
+      x: 0,
       y: 0,
       transition: { type: 'spring', bounce: 0.25, duration: 0.5 },
+      scale: 1,
     },
     exit: {
       opacity: 0,
@@ -25,7 +33,7 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
       <Toast.Root
         asChild
         open
-        className="grow min-w-[20rem] lg:w-[24rem] bg-white p-4 rounded-md shadow-lg flex items-start space-x-8">
+        className="grow min-w-[20rem] lg:w-[24rem] bg-white p-4 rounded-md shadow-lg flex justify-start items-center space-x-8">
         <motion.div
           variants={toastVariants}
           initial="hidden"
@@ -70,7 +78,7 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
                   <File className="text-zinc-500 w-4 h-4 stroke-2 animate-pulse" />
                 </div>
               </motion.div>
-              <div className="text-zinc-600 flex gap-x-2">
+              <div className="text-zinc-600 flex gap-x-2 w-full grow ">
                 <span>Downloading...</span>
                 <span>{`${(fileSizeDownloaded / (1024 * 1024)).toFixed(1)}/${(
                   totalSize /
@@ -80,7 +88,7 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
             </div>
           ) : (
             <motion.div
-              className="flex items-center space-x-3"
+              className="flex items-center space-x-3 w-full grow "
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}>
               <div className="w-10 h-10 flex justify-center items-center">
@@ -91,6 +99,11 @@ const DownloadToast = ({ fileSizeDownloaded, totalSize }) => {
               <span className="text-zinc-600">Download Complete</span>
             </motion.div>
           )}
+          <button
+            className="w-8 h-8 text-zinc-500 hover:text-zinc-800 flex justify-center items-center hover:bg-zinc-50"
+            onClick={handleCancel}>
+            <X className="w-4 h-4" />
+          </button>
         </motion.div>
       </Toast.Root>
       <Toast.Viewport />
