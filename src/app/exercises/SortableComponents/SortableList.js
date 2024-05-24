@@ -92,8 +92,8 @@ const SortableList = () => {
   };
 
   return (
-    <div className="p-8 w-full">
-      <div className="flex flex-col gap-y-2 max-w-xl mx-auto">
+    <div className="px-5 w-full pt-8 pb-10">
+      <div className="flex flex-col gap-y-5 max-w-xl mx-auto">
         <div className="w-full grow flex flex-col-reverse lg:flex-row justify-end gap-2 ">
           <button
             className="h-12 lg:w-fit flex bg-white text-zinc-600 shadow-sm justify-start items-center cursor-pointer rounded-md border gap-x-0.5 px-4 hover:text-zinc-700 hover:bg-zinc-100 "

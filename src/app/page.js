@@ -45,12 +45,16 @@ export default function Home() {
             subtitle="3"
             date="22 May 2024"
             title="Drag and Drop Sortable List"
-            description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it."
+            description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it. And with animation!"
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
                 name: 'DnD Kit',
                 link: 'https://dndkit.com/',
+              },
+              {
+                name: 'Framer Motion',
+                link: 'https://www.framer.com/motion/introduction/',
               },
             ]}>
             <Sortable />
@@ -59,7 +63,7 @@ export default function Home() {
             subtitle="4"
             date="23 May 2024"
             title="Download Feedback"
-            description="Download feedback should be nice and clear."
+            description="The file comes from the download button and into your computer. User gets clear and nice feedback of download progress. This is a demo. No real file is actually downloaded."
             libraries={[
               {
                 name: 'Radix Toast',

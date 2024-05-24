@@ -33,10 +33,10 @@ const Template = ({
         <h2 className="font-semibold text-2xl text-zinc-800 dark:text-zinc-300">
           {title}
         </h2>{' '}
-        <div>
+        <div className="flex flex-col gap-y-4">
           {' '}
-          <p className="text-zinc-500">{description}</p>{' '}
-          <div className="text-zinc-500 flex gap-x-2 mt-3 ">
+          <p className="text-zinc-500 max-w-xl">{description}</p>{' '}
+          <div className="text-zinc-500 flex gap-x-2 ">
             <LibraryLinks libraries={libraries} />
           </div>
         </div>
