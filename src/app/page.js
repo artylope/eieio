@@ -45,12 +45,16 @@ export default function Home() {
             subtitle="3"
             date="22 May 2024"
             title="Drag and Drop Sortable List"
-            description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it."
+            description="Manage a list of items - create, rename, delete, duplicate and reorder in the way you want it. And with animation!"
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
                 name: 'DnD Kit',
                 link: 'https://dndkit.com/',
+              },
+              {
+                name: 'Framer Motion',
+                link: 'https://www.framer.com/motion/introduction/',
               },
             ]}>
             <Sortable />
