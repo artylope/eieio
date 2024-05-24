@@ -63,7 +63,7 @@ export default function Home() {
             subtitle="4"
             date="23 May 2024"
             title="Download Feedback"
-            description="Download feedback should be nice and clear."
+            description="The file comes from the download button and into your computer. User gets clear and nice feedback of download progress. This is a demo. No real file is actually downloaded."
             libraries={[
               {
                 name: 'Radix Toast',
