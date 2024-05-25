@@ -11,7 +11,7 @@ export default function Home() {
       <div className="flex grow py-8 ">
         <div className="container mx-auto grow">
           <Template
-            subtitle="1"
+            id="1"
             date="14 Jan 2024"
             title="Typography Slider"
             description="The slider component that controls the text size with dynamic text input"
@@ -28,7 +28,7 @@ export default function Home() {
             <TypographySlider />
           </Template>
           <Template
-            subtitle="2"
+            id="2"
             date="14 Jan 2024"
             title="Loading card"
             description="Card loading skeleton until the content is ready and loaded"
@@ -42,7 +42,7 @@ export default function Home() {
           </Template>
 
           <Template
-            subtitle="3"
+            id="3"
             date="22 May 2024"
             title="Drag and Drop Sortable List"
             description="Drag and drop items to manage your list. Create, rename, delete, duplicate, and reorder items exactly how you want. Enjoy smooth animations as you organise!"
@@ -60,7 +60,7 @@ export default function Home() {
             <Sortable />
           </Template>
           <Template
-            subtitle="4"
+            id="4"
             date="23 May 2024"
             title="Download Feedback"
             description="Click the download button to simulate downloading a file to your computer. You'll receive clear and pleasant feedback on the progress. Note: This is a demo, and no actual file will be downloaded."
