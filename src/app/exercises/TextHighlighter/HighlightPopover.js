@@ -12,7 +12,7 @@ const HighlightPopover = ({ coords, text }) => {
 
   return (
     <div
-      className={`absolute bg-white border rounded-md max-w-sm shadow-md p-4  -top-${popoverStyle.top} left-${popoverStyle.left}`}>
+      className={`leading-normal absolute bg-white border rounded-md max-w-sm shadow-md p-4  -top-${popoverStyle.top} left-${popoverStyle.left}`}>
       {text}
     </div>
   );

@@ -35,18 +35,15 @@ const TextHighlighter = () => {
                 Sed semper fermentum elementum. Donec maximus placerat erat, a
                 facilisis lorem pharetra nec. Pellentesque habitant morbi
                 tristique senectus et netus et malesuada fames ac turpis
-                egestas. Aliquam dapibus vel nunc nec porta. Vestibulum
-                tristique orci sit amet dolor porta, eu condimentum velit
-                imperdiet. Nunc in auctor nibh, a vehicula est. Donec faucibus
-                maximus finibus. Vestibulum ac malesuada enim, a pellentesque
-                ex.
-                {isPopoverVisible && (
-                  <HighlightPopover
-                    coords={selectionCoords}
-                    text={selectedText}
-                  />
-                )}
+                egestas.{' '}
+                <span className="bg-yellow-200">
+                  Aliquam dapibus vel nunc nec porta. Vestibulum tristique orci
+                  sit amet dolor porta, eu condimentum velit imperdiet.{' '}
+                </span>
+                Nunc in auctor nibh, a vehicula est. Donec faucibus maximus
+                finibus. Vestibulum ac malesuada enim, a pellentesque ex.
               </p>
+              {/* TODO: figure out how do i add a popover above the span bounding rect. */}
             </div>
           </article>
           <aside className="p-8 flex lg:w-1/3">
