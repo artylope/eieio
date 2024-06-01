@@ -1,19 +1,23 @@
+// components/HighlightPopover.js
 import React from 'react';
 
 const HighlightPopover = ({ coords, text }) => {
   if (!coords) return null;
-  console.log();
 
   const popoverStyle = {
-    top: coords.top, // Adjust the position to be above the selection
-    left: coords.left,
+    top: `${coords.top - coords.height - 36}px`, // 1rem above the span
+    left: `${coords.left}px`,
+    transform: 'translateX(-50%)', // Center horizontally
     zIndex: 1000,
   };
 
   return (
     <div
-      className={`leading-normal absolute bg-white border rounded-md max-w-sm shadow-md p-4  -top-${popoverStyle.top} left-${popoverStyle.left}`}>
-      {text}
+      className="absolute bg-white border rounded-md shadow-md h-12 w-16"
+      style={popoverStyle}>
+      <div className="flex justify-center items-center grow w-full h-full">
+        Save
+      </div>
     </div>
   );
 };

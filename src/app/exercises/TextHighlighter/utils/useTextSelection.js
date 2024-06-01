@@ -7,20 +7,30 @@ const useTextSelection = () => {
   useEffect(() => {
     const handleSelectionChange = () => {
       const selection = window.getSelection();
-      console.log('Selection:', selection); // Log selection object
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
-        console.log('Range:', range); // Log range object
         if (!range.collapsed) {
-          const rect = range.getBoundingClientRect();
-          console.log('Rect:', rect); // Log rect object
+          // Remove previous highlights
+          document.querySelectorAll('.custom-highlight').forEach((span) => {
+            const parent = span.parentNode;
+            while (span.firstChild) parent.insertBefore(span.firstChild, span);
+            parent.removeChild(span);
+          });
+
+          // Apply custom background to the selected text
+          const span = document.createElement('span');
+          span.className = 'custom-highlight';
+          range.surroundContents(span);
+
+          const rect = span.getBoundingClientRect();
+          const parentRect = span.offsetParent.getBoundingClientRect();
+
           setSelectionCoords({
-            top: rect.top,
-            left: rect.left,
-            width: rect.width,
+            top: rect.top - parentRect.top,
+            left: rect.left - parentRect.left + rect.width / 2, // Center the popover horizontally
+            height: rect.height,
           });
           setSelectedText(selection.toString());
-          console.log(`Highlighted text: "${selection.toString()}"`);
         } else {
           setSelectionCoords(null);
           setSelectedText('');
