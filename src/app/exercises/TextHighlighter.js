@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import useTextSelection from './TextHighlighter/utils/useTextSelection';
 import HighlightPopover from './TextHighlighter/highlightPopover';
+import HighlightTag from './TextHighlighter/HighlightTag';
 
 const TextHighlighter = () => {
   const { selectionCoords, selectedText } = useTextSelection();
@@ -44,9 +45,11 @@ const TextHighlighter = () => {
               <HighlightPopover coords={selectionCoords} text={selectedText} />
             )}
           </article>
-          <aside className="p-8 flex lg:w-1/3">
+          <aside className="p-8 flex lg:w-1/3 gap-2">
             {/* side panel for highlighted text */}
-            dsladkld
+            <HighlightTag text="Important text" />
+            <HighlightTag text="some other things to note" />
+            <HighlightTag text="lorem ipsum parllayis" />
           </aside>
         </div>
       </div>
