@@ -1,13 +1,30 @@
 // pages/index.js
 'use client';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import useTextSelection from './TextHighlighter/utils/useTextSelection';
 import HighlightPopover from './TextHighlighter/highlightPopover';
 import HighlightTag from './TextHighlighter/HighlightTag';
 
 const TextHighlighter = () => {
-  const { selectionCoords, selectedText } = useTextSelection();
+  const { selectionCoords, selectedText, setSelectedText } = useTextSelection();
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
+  const popoverRef = useRef(null);
+
+  // Function to check if clicked outside of popover
+  const handleClickOutside = (event) => {
+    if (popoverRef.current && !popoverRef.current.contains(event.target)) {
+      setIsPopoverVisible(false);
+      setSelectedText(''); // unhighlight the selected text
+    }
+  };
+
+  // Add event listener for clicks
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   useEffect(() => {
     if (selectedText) {
@@ -42,7 +59,12 @@ const TextHighlighter = () => {
               </p>
             </div>
             {isPopoverVisible && (
-              <HighlightPopover coords={selectionCoords} text={selectedText} />
+              <div ref={popoverRef}>
+                <HighlightPopover
+                  coords={selectionCoords}
+                  text={selectedText}
+                />
+              </div>
             )}
           </article>
           <aside className="p-8 flex lg:w-1/3 gap-2">

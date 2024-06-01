@@ -50,7 +50,7 @@ const useTextSelection = () => {
     };
   }, []);
 
-  return { selectionCoords, selectedText };
+  return { selectedText, setSelectedText, selectionCoords };
 };
 
 export default useTextSelection;
