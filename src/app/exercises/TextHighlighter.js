@@ -2,7 +2,7 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import useTextSelection from './TextHighlighter/utils/useTextSelection';
-import HighlightPopover from './TextHighlighter/highlightPopover';
+import HighlightPopover from './TextHighlighter/HighlightPopover';
 import HighlightTag from './TextHighlighter/HighlightTag';
 
 const TextHighlighter = () => {
