@@ -48,16 +48,16 @@ const Template = ({ id, title, description, date, children, libraries }) => {
         <div className="flex flex-col gap-y-4 w-full">
           {' '}
           <p className="text-zinc-500 max-w-xl">{description}</p>{' '}
-          <div className="text-zinc-500 flex flex-col md:flex-row gap-2 w-full">
-            <div className="flex gap-x-2 grow flex-col sm:flex-row gap-2 w-full ">
+          <div className="text-zinc-500 flex flex-col sm:flex-row gap-2 w-full">
+            <div className="flex gap-x-2 grow flex-row gap-2 w-full ">
               {' '}
               <LibraryLinks libraries={libraries} />{' '}
             </div>
             <button
               className="px-2 py-1 flex justify-start items-center text-zinc-500 rounded hover:bg-zinc-100 hover:text-zinc-700"
               onClick={handleShareButton}>
-              <Share2 className="w-5 h-5" />{' '}
-              <span className="px-2"> Share</span>
+              <Share2 className="w-4 h-4" />{' '}
+              <span className="px-2 text-sm"> Share</span>
             </button>
           </div>
         </div>
