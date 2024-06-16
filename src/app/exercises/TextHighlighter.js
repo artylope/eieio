@@ -77,7 +77,7 @@ const TextHighlighter = () => {
                 the same thing.
               </p>
             </div>
-            <span className="italic text-zinc-500 mt-8">
+            <span className="italic text-zinc-500 mt-8 text-sm">
               Excerpts from The Subtle Art of Not Giving A Fuck by Mark Manson
             </span>
 
@@ -91,18 +91,23 @@ const TextHighlighter = () => {
               </div>
             )}
           </article>
-          <aside className="p-8 flex lg:w-1/3  flex-wrap justify-start items-start">
-            {/* side panel for highlighted text */}
-            <div className="gap-2 flex flex-wrap">
-              {' '}
-              {savedTags.map((tag, index) => (
-                <HighlightTag
-                  key={index}
-                  text={tag}
-                  onRemove={handleRemoveTag}
-                />
-              ))}
+          <aside className="p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-5">
+            <div className="gap-y-5 flex flex-col ">
+              <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+                Phrases you saved
+              </h3>
+              <div className="gap-2 flex flex-wrap">
+                {' '}
+                {savedTags.map((tag, index) => (
+                  <HighlightTag
+                    key={index}
+                    text={tag}
+                    onRemove={handleRemoveTag}
+                  />
+                ))}
+              </div>
             </div>
+            {/* side panel for highlighted text */}
           </aside>
         </div>
       </div>
