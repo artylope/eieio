@@ -73,5 +73,21 @@ module.exports = {
       },
     },
   },
-  plugins: [require('tailwindcss-animate')],
+  variants: {
+    extend: {
+      // Adding `selection` variant for background color and text color
+      backgroundColor: ['selection'],
+      textColor: ['selection'],
+    },
+  },
+  plugins: [
+    require('tailwindcss-animate'),
+    function ({ addVariant, e }) {
+      addVariant('selection', ({ modifySelectors, separator }) => {
+        modifySelectors(({ className }) => {
+          return `.${e(`selection${separator}${className}`)}::selection`;
+        });
+      });
+    },
+  ],
 };

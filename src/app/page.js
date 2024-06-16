@@ -1,8 +1,10 @@
 import Image from 'next/image';
 import TypographySlider from '@/app/exercises/TypographySlider';
-import SkeletonCard from './exercises/SkeletonCard';
-import Sortable from './exercises/Sortable';
-import Downloader from './exercises/Downloader';
+import SkeletonCard from '@/app/exercises/SkeletonCard';
+import Sortable from '@/app/exercises/Sortable';
+import Downloader from '@/app/exercises/Downloader';
+import TextHighlighter from '@/app/exercises/TextHighlighter';
+
 import Template from '@/app/exercises/Template';
 
 export default function Home() {
@@ -75,6 +77,23 @@ export default function Home() {
               },
             ]}>
             <Downloader />
+          </Template>
+          <Template
+            id="5"
+            date="26 May 2024"
+            title="Highlighter"
+            description="Lorem Ipsum"
+            libraries={[
+              {
+                name: 'Radix Toast',
+                link: 'https://www.radix-ui.com/primitives/docs/components/toast',
+              },
+              {
+                name: 'Framer Motion',
+                link: 'https://www.framer.com/motion/introduction/',
+              },
+            ]}>
+            <TextHighlighter />
           </Template>
         </div>
       </div>

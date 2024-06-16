@@ -85,6 +85,7 @@ export function SortableItem(props) {
 
   return (
     <div
+      id={props.id}
       ref={setNodeRef}
       style={style}
       className={`flex justify-center items-center border rounded-md bg-white shadow-sm  text-zinc-700 w-full ${

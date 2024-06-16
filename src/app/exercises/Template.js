@@ -1,11 +1,13 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import * as Toast from '@radix-ui/react-toast';
 
 import { Share2 } from 'lucide-react';
 
 const Template = ({ id, title, description, date, children, libraries }) => {
   const router = useRouter();
+  const [toastOpen, setToastOpen] = useState(false);
 
   const LibraryLinks = ({ libraries }) => {
     return (
@@ -13,7 +15,7 @@ const Template = ({ id, title, description, date, children, libraries }) => {
         {libraries.map((library, index) => (
           <div
             key={index}
-            className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex  justify-start items-center px-2 py-1 text-sm rounded w-fit">
+            className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex  justify-start items-center px-2 py-1 text-sm rounded">
             <a href={library.link} target="_blank" rel="noopener noreferrer">
               {library.name}
             </a>
@@ -29,6 +31,7 @@ const Template = ({ id, title, description, date, children, libraries }) => {
     let url = `${currentPath}/#exercise${id}`;
     console.log(url);
     navigator.clipboard.writeText(url);
+    setToastOpen(true);
   }
 
   return (
@@ -48,17 +51,31 @@ const Template = ({ id, title, description, date, children, libraries }) => {
         <div className="flex flex-col gap-y-4 w-full">
           {' '}
           <p className="text-zinc-500 max-w-xl">{description}</p>{' '}
-          <div className="text-zinc-500 flex flex-col sm:flex-row gap-2 w-full">
-            <div className="flex gap-x-2 grow flex-row gap-2 w-full ">
+          <div className="text-zinc-500 flex gap-2 w-full justify-between">
+            <div className="flex gap-x-2 flex-rows">
               {' '}
               <LibraryLinks libraries={libraries} />{' '}
             </div>
-            <button
-              className="px-2 py-1 flex justify-start items-center text-zinc-500 rounded hover:bg-zinc-100 hover:text-zinc-700"
-              onClick={handleShareButton}>
-              <Share2 className="w-4 h-4" />{' '}
-              <span className="px-2 text-sm"> Share</span>
-            </button>
+            <div className="relative">
+              <button
+                className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
+                onClick={handleShareButton}>
+                <Share2 className="w-4 h-4" />{' '}
+                <span className="px-1 text-sm">Copy Link</span>
+              </button>
+              <div className="absolute z-50">
+                <Toast.Provider swipeDirection="right">
+                  <Toast.Root
+                    open={toastOpen}
+                    onOpenChange={setToastOpen}
+                    duration={1000}
+                    className=" bg-zinc-800 text-white px-4 py-2 rounded shadow-lg flex items-center gap-x-2">
+                    <Toast.Title>Copied !</Toast.Title>
+                  </Toast.Root>
+                  <Toast.Viewport className="-translate-y-20 w-24 flex justify-center items-center" />
+                </Toast.Provider>
+              </div>
+            </div>
           </div>
         </div>
       </div>

@@ -109,6 +109,7 @@ const SortableList = () => {
         </div>
 
         <DndContext
+          id="drag-and-drop-sortable"
           collisionDetection={closestCenter}
           onDragEnd={handleDragEnd}>
           <SortableContext items={items} strategy={verticalListSortingStrategy}>
