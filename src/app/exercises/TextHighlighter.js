@@ -54,9 +54,7 @@ const TextHighlighter = () => {
         <section className="border-b p-8 flex flex-col gap-y-4">
           {/* instructions section */}
 
-          <p className="font-semibold">
-            Highlight the phrases you want to save
-          </p>
+          <p className="font-semibold">Highlight to save phrases</p>
         </section>
         <div className="flex flex-col lg:flex-row">
           <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col">

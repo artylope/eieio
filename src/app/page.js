@@ -80,19 +80,10 @@ export default function Home() {
           </Template>
           <Template
             id="5"
-            date="26 May 2024"
-            title="Highlighter"
-            description="Lorem Ipsum"
-            libraries={[
-              {
-                name: 'Radix Toast',
-                link: 'https://www.radix-ui.com/primitives/docs/components/toast',
-              },
-              {
-                name: 'Framer Motion',
-                link: 'https://www.framer.com/motion/introduction/',
-              },
-            ]}>
+            date="16 June 2024"
+            title="Highlight to save"
+            description="Text heavy Interfaces often require interactions like highlight to save"
+            libraries={[]}>
             <TextHighlighter />
           </Template>
         </div>
