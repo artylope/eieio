@@ -77,14 +77,11 @@ const TextHighlighter = () => {
   return (
     <div className="bg-white rounded">
       <div className="flex flex-col w-full relative">
-        <section className="border-b p-8 flex flex-col gap-y-4">
-          {/* instructions section */}
-          <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
-            Highlight to save phrases
-          </h3>
-        </section>
         <div className="flex flex-col lg:flex-row">
-          <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col">
+          <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-5">
+            <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+              Highlight to save phrases
+            </h3>
             <div className="leading-loose highlightable-text-parent " id="">
               <p className="highlight:bg-yellow-200 highlightable-text">
                 But our attention is limited. There’s no way we can process the
@@ -105,16 +102,17 @@ const TextHighlighter = () => {
             <span className="italic text-zinc-500 mt-8 text-sm">
               Excerpts from The Subtle Art of Not Giving A Fuck by Mark Manson
             </span>
-
-            {isPopoverVisible && (
-              <div ref={popoverRef}>
-                <HighlightPopover
-                  coords={selectionCoords}
-                  text={selectedText}
-                  onSave={handleSaveTag}
-                />
-              </div>
-            )}
+            <div>
+              {isPopoverVisible && (
+                <div ref={popoverRef}>
+                  <HighlightPopover
+                    coords={selectionCoords}
+                    text={selectedText}
+                    onSave={handleSaveTag}
+                  />
+                </div>
+              )}
+            </div>
           </article>
           <aside className="p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-5">
             <div className="gap-y-5 flex flex-col w-full ">
