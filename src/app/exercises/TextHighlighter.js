@@ -5,6 +5,8 @@ import useTextSelection from './TextHighlighter/utils/useTextSelection';
 import HighlightPopover from './TextHighlighter/HighlightPopover';
 import HighlightTag from './TextHighlighter/HighlightTag';
 
+import { Delete, RotateCcw } from 'lucide-react';
+
 const TextHighlighter = () => {
   const { selectionCoords, selectedText, setSelectedText } = useTextSelection();
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
@@ -39,8 +41,15 @@ const TextHighlighter = () => {
   const handleSaveTag = () => {
     if (selectedText && !savedTags.includes(selectedText)) {
       setSavedTags([...savedTags, selectedText]);
-      setSelectedText(''); // clear the selected text after saving
       setIsPopoverVisible(false); // hide the popover
+      setSelectedText('');
+
+      // Remove the highlight
+      document.querySelectorAll('.custom-highlight').forEach((span) => {
+        const parent = span.parentNode;
+        while (span.firstChild) parent.insertBefore(span.firstChild, span);
+        parent.removeChild(span);
+      });
     }
   };
 
@@ -49,17 +58,18 @@ const TextHighlighter = () => {
   };
 
   return (
-    <div className="p-8">
-      <div className="bg-white rounded-md flex flex-col w-full border shadow-sm relative">
+    <div className="bg-white">
+      <div className="flex flex-col w-full relative">
         <section className="border-b p-8 flex flex-col gap-y-4">
           {/* instructions section */}
-
-          <p className="font-semibold">Highlight to save phrases</p>
+          <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+            Highlight to save phrases
+          </h3>
         </section>
         <div className="flex flex-col lg:flex-row">
           <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col">
-            <div className="leading-loose">
-              <p className="highlight:bg-yellow-200">
+            <div className="leading-loose" id="selectable-text">
+              <p className="highlight:bg-yellow-200 highlightable-text">
                 But our attention is limited. There’s no way we can process the
                 tidal waves of information flowing past us constantly.
                 Therefore, the only zeroes and ones that break through and catch
@@ -90,10 +100,20 @@ const TextHighlighter = () => {
             )}
           </article>
           <aside className="p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-5">
-            <div className="gap-y-5 flex flex-col ">
-              <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
-                Phrases you saved
-              </h3>
+            <div className="gap-y-5 flex flex-col w-full ">
+              <div className="w-full flex items-center justify-between ">
+                <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+                  Phrases you saved
+                </h3>
+
+                <button
+                  className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
+                  onClick={() => setSavedTags([])}>
+                  <RotateCcw className="w-4 h-4" />{' '}
+                  <span className="px-1 text-sm">Clear all</span>
+                </button>
+              </div>
+
               <div className="gap-2 flex flex-wrap">
                 {' '}
                 {savedTags.map((tag, index) => (

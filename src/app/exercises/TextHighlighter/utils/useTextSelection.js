@@ -5,11 +5,17 @@ const useTextSelection = () => {
   const [selectedText, setSelectedText] = useState('');
 
   useEffect(() => {
-    const handleSelectionChange = () => {
+    const handleSelectionChange = (event) => {
       const selection = window.getSelection();
       if (selection && selection.rangeCount > 0) {
         const range = selection.getRangeAt(0);
-        if (!range.collapsed) {
+        const highlightableElement = document.querySelector(
+          '.highlightable-text'
+        );
+        if (
+          !range.collapsed &&
+          highlightableElement.contains(range.commonAncestorContainer)
+        ) {
           // Remove previous highlights
           document.querySelectorAll('.custom-highlight').forEach((span) => {
             const parent = span.parentNode;
