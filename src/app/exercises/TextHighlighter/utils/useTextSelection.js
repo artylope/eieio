@@ -49,10 +49,12 @@ const useTextSelection = () => {
 
     document.addEventListener('mouseup', handleSelectionChange);
     document.addEventListener('keyup', handleSelectionChange);
+    document.addEventListener('touchend', handleSelectionChange);
 
     return () => {
       document.removeEventListener('mouseup', handleSelectionChange);
       document.removeEventListener('keyup', handleSelectionChange);
+      document.removeEventListener('touchend', handleSelectionChange);
     };
   }, []);
 
