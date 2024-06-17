@@ -19,7 +19,9 @@ const HighlightPopover = ({ coords, text, onSave }) => {
       <div className="px-4 py-1">
         <button
           className="flex justify-center items-center grow text-zinc-700 hover:text-zinc-800"
-          onClick={onSave}>
+          onClick={onSave}
+          onTouchStart={onSave} // Ensure touch events are handled
+        >
           <span className=""> Save</span>
         </button>
       </div>

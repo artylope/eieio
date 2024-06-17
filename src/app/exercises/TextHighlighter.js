@@ -19,6 +19,15 @@ const TextHighlighter = () => {
     if (popoverRef.current && !popoverRef.current.contains(event.target)) {
       setIsPopoverVisible(false);
       setSelectedText(''); // unhighlight the selected text
+
+      // Remove the highlight
+      document.querySelectorAll('.custom-highlight').forEach((span) => {
+        const parent = span.parentNode;
+        while (span.firstChild) parent.insertBefore(span.firstChild, span);
+        parent.removeChild(span);
+      });
+
+      window.getSelection().removeAllRanges(); // Clear the selection
     }
   };
 
@@ -52,6 +61,8 @@ const TextHighlighter = () => {
         while (span.firstChild) parent.insertBefore(span.firstChild, span);
         parent.removeChild(span);
       });
+
+      window.getSelection().removeAllRanges(); // Clear the selection
     }
   };
 
@@ -70,7 +81,7 @@ const TextHighlighter = () => {
         </section>
         <div className="flex flex-col lg:flex-row">
           <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col">
-            <div className="leading-loose" id="selectable-text">
+            <div className="leading-loose highlightable-text-parent " id="">
               <p className="highlight:bg-yellow-200 highlightable-text">
                 But our attention is limited. There’s no way we can process the
                 tidal waves of information flowing past us constantly.
