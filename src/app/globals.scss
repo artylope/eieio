@@ -76,22 +76,10 @@
 }
 
 @layer components {
-  .highlightable-text-parent {
-    -webkit-touch-callout: none; /* Disable callout, image save panel (iOS) */
-    -webkit-user-select: none; /* Disable text selection (iOS) */
-    -khtml-user-select: none; /* Disable text selection (Konqueror) */
-    -moz-user-select: none; /* Disable text selection (Firefox) */
-    -ms-user-select: none; /* Disable text selection (IE/Edge) */
-    user-select: none; /* Non-prefixed version, currently supported by Chrome and Opera */
-
-    .highlightable-text {
-      -webkit-user-select: text;
-      -khtml-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-    }
+  .highlightable-text {
+    -webkit-touch-callout: none; /* Disable the iOS touch callout */
   }
+
   .custom-highlight {
     @apply bg-yellow-200;
   }

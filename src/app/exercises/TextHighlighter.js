@@ -74,15 +74,55 @@ const TextHighlighter = () => {
     setSavedTags([]);
   };
 
+  // Prevent default iOS menu only when text is selected
+  const preventDefaultMenu = (event) => {
+    const selection = window.getSelection();
+    if (selection.toString().length > 0) {
+      event.preventDefault();
+    }
+  };
+
+  // Add event listener to prevent default iOS menu
+  useEffect(() => {
+    const highlightableElement = document.querySelector('.highlightable-text');
+    if (highlightableElement) {
+      highlightableElement.addEventListener('contextmenu', preventDefaultMenu);
+      highlightableElement.addEventListener('touchstart', preventDefaultMenu);
+      highlightableElement.addEventListener('touchend', preventDefaultMenu);
+      highlightableElement.addEventListener('touchmove', preventDefaultMenu);
+    }
+
+    return () => {
+      if (highlightableElement) {
+        highlightableElement.removeEventListener(
+          'contextmenu',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchstart',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchend',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchmove',
+          preventDefaultMenu
+        );
+      }
+    };
+  }, []);
+
   return (
     <div className="bg-white rounded">
       <div className="flex flex-col w-full relative">
         <div className="flex flex-col lg:flex-row">
-          <article className="p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-5">
+          <article className="p-5 md:p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
             <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
               Highlight to save phrases
             </h3>
-            <div className="leading-loose highlightable-text-parent " id="">
+            <div className="leading-loose">
               <p className="highlight:bg-yellow-200 highlightable-text">
                 But our attention is limited. There’s no way we can process the
                 tidal waves of information flowing past us constantly.
@@ -114,7 +154,7 @@ const TextHighlighter = () => {
               )}
             </div>
           </article>
-          <aside className="p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-5">
+          <aside className="p-5 md:p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-3  md:gap-y-5">
             <div className="gap-y-5 flex flex-col w-full ">
               <div className="w-full flex items-center justify-between ">
                 <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
