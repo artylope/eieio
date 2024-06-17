@@ -70,8 +70,12 @@ const TextHighlighter = () => {
     setSavedTags(savedTags.filter((tag) => tag !== text));
   };
 
+  const handleClearAllTags = () => {
+    setSavedTags([]);
+  };
+
   return (
-    <div className="bg-white">
+    <div className="bg-white rounded">
       <div className="flex flex-col w-full relative">
         <section className="border-b p-8 flex flex-col gap-y-4">
           {/* instructions section */}
@@ -121,7 +125,7 @@ const TextHighlighter = () => {
 
                 <button
                   className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
-                  onClick={() => setSavedTags([])}>
+                  onClick={handleClearAllTags}>
                   <RotateCcw className="w-4 h-4" />{' '}
                   <span className="px-1 text-sm">Clear all</span>
                 </button>
