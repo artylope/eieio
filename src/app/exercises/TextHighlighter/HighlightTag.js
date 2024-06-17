@@ -9,6 +9,7 @@ const HighlightTag = ({ text, onRemove }) => {
         {' '}
         <button
           onClick={() => onRemove(text)}
+          onTouchStart={() => onRemove(text)}
           className="flex justify-center items-center text-zinc-400 ">
           <X className=" w-4 h-4 group-hover:text-red-500" />
         </button>

@@ -76,6 +76,10 @@
 }
 
 @layer components {
+  .highlightable-text {
+    -webkit-touch-callout: none; /* Disable the iOS touch callout */
+  }
+
   .custom-highlight {
     @apply bg-yellow-200;
   }
