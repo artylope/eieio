@@ -16,9 +16,9 @@ const HighlightPopover = ({ coords, text, onSave }) => {
     <div
       className="absolute bg-white border rounded-md shadow-md h-11 w-20 flex justify-center items-center"
       style={popoverStyle}>
-      <div className="px-4 py-1">
+      <div className="">
         <button
-          className="flex justify-center items-center grow text-zinc-700 hover:text-zinc-800"
+          className="flex justify-center items-center grow text-zinc-700 hover:text-zinc-800 px-4 py-1"
           onClick={onSave}
           onTouchStart={onSave} // Ensure touch events are handled
         >

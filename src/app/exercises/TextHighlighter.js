@@ -4,8 +4,8 @@ import { useState, useEffect, useRef } from 'react';
 import useTextSelection from './TextHighlighter/utils/useTextSelection';
 import HighlightPopover from './TextHighlighter/HighlightPopover';
 import HighlightTag from './TextHighlighter/HighlightTag';
-
-import { Delete, RotateCcw } from 'lucide-react';
+import { StickyNote, RotateCcw, X, Quote } from 'lucide-react';
+import * as Dialog from '@radix-ui/react-dialog';
 
 const TextHighlighter = () => {
   const { selectionCoords, selectedText, setSelectedText } = useTextSelection();
@@ -13,6 +13,7 @@ const TextHighlighter = () => {
   const popoverRef = useRef(null);
 
   const [savedTags, setSavedTags] = useState([]);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
   // Function to check if clicked outside of popover
   const handleClickOutside = (event) => {
@@ -54,6 +55,7 @@ const TextHighlighter = () => {
       setSavedTags([...savedTags, selectedText]);
       setIsPopoverVisible(false); // hide the popover
       setSelectedText('');
+      setIsBottomSheetOpen(true);
 
       // Remove the highlight
       document.querySelectorAll('.custom-highlight').forEach((span) => {
@@ -115,10 +117,10 @@ const TextHighlighter = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded">
+    <div className="bg-white rounded relative">
       <div className="flex flex-col w-full relative">
         <div className="flex flex-col lg:flex-row">
-          <article className="p-5 md:p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
+          <article className="px-5 py-8 md:p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
             <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
               Highlight to save phrases
             </h3>
@@ -154,15 +156,15 @@ const TextHighlighter = () => {
               )}
             </div>
           </article>
-          <aside className="p-5 md:p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-3  md:gap-y-5">
-            <div className="gap-y-5 flex flex-col w-full ">
-              <div className="w-full flex items-center justify-between ">
+          <aside className="p-5 md:p-8 lg:w-1/3 flex-wrap justify-start items-start gap-y-3 md:gap-y-5 hidden md:flex">
+            <div className="gap-y-5 flex flex-col w-full">
+              <div className="w-full flex items-center justify-between">
                 <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
                   Phrases you saved
                 </h3>
 
                 <button
-                  className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
+                  className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded hover:text-zinc-700"
                   onClick={handleClearAllTags}>
                   <RotateCcw className="w-4 h-4" />{' '}
                   <span className="px-1 text-sm">Clear all</span>
@@ -184,6 +186,61 @@ const TextHighlighter = () => {
           </aside>
         </div>
       </div>
+
+      <Dialog.Root open={isBottomSheetOpen} onOpenChange={setIsBottomSheetOpen}>
+        <Dialog.Trigger className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 rounded-full  bg-white text-zinc-600 border shadow-lg gap-x-2 flex md:hidden justify-center items-center px-4 py-2">
+          <StickyNote className="w-5 h-5" /> Show saved phrases
+        </Dialog.Trigger>
+        <Dialog.Portal>
+          <Dialog.Overlay className="fixed inset-0 bg-black opacity-50 md:hidden" />
+          <Dialog.Content className="fixed inset-x-0 bottom-0 bg-white p-5 rounded-t-lg md:hidden flex  flex-col  min-h-[24rem]">
+            <Dialog.Close asChild>
+              <div className="flex justify-between items-center mb-8">
+                {' '}
+                <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+                  Phrases you saved
+                </h3>
+                <button className="text-zinc-500 hover:text-zinc-700">
+                  <X className="w-6 h-6" />
+                </button>
+              </div>
+            </Dialog.Close>
+            <div className="flex justify-end items-center mb-4 ">
+              {savedTags.length === 0 ? (
+                ''
+              ) : (
+                <button
+                  className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded hover:text-zinc-700"
+                  onClick={handleClearAllTags}>
+                  <RotateCcw className="w-4 h-4" />{' '}
+                  <span className="px-1 text-sm">Clear all</span>
+                </button>
+              )}
+            </div>
+            <div className="gap-2 flex flex-wrap mt-3 justify-start">
+              {savedTags.length === 0 ? (
+                <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
+                  <Quote className="w-6 h-6 text-zinc-600 mb-2" />
+                  <h4 className="text-zinc-800 text-xl font-semibold">
+                    No phrases saved yet
+                  </h4>
+                  <p className="text-zinc-600">
+                    Saved phrases will show up here
+                  </p>
+                </div>
+              ) : (
+                savedTags.map((tag, index) => (
+                  <HighlightTag
+                    key={index}
+                    text={tag}
+                    onRemove={handleRemoveTag}
+                  />
+                ))
+              )}
+            </div>
+          </Dialog.Content>
+        </Dialog.Portal>
+      </Dialog.Root>
     </div>
   );
 };
