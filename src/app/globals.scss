@@ -77,7 +77,9 @@
 
 @layer components {
   .highlightable-text {
-    -webkit-touch-callout: none; /* Disable the iOS touch callout */
+    user-select: text;
+    -webkit-user-select: text; /* Safari */
+    -webkit-touch-callout: none; /* Disable the default callout menu */
   }
 
   .custom-highlight {

@@ -19,7 +19,7 @@ export default function Home() {
             description="The slider component that controls the text size with dynamic text input"
             libraries={[
               {
-                name: 'Tailwind CSS',
+                name: 'Tailwind',
                 link: 'https://tailwindcss.com/',
               },
               {
@@ -36,7 +36,7 @@ export default function Home() {
             description="Card loading skeleton until the content is ready and loaded"
             libraries={[
               {
-                name: 'Tailwind CSS',
+                name: 'Tailwind',
                 link: 'https://tailwindcss.com/',
               },
             ]}>
@@ -49,7 +49,7 @@ export default function Home() {
             title="Drag and Drop Sortable List"
             description="Drag and drop items to manage your list. Create, rename, delete, duplicate, and reorder items exactly how you want. Enjoy smooth animations as you organise!"
             libraries={[
-              { name: 'Tailwind CSS', link: 'https://tailwindcss.com/' },
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
                 name: 'DnD Kit',
                 link: 'https://dndkit.com/',
@@ -84,9 +84,9 @@ export default function Home() {
             title="Highlight and save to notebook"
             description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click save"
             libraries={[
-              { name: 'Tailwind CSS', link: 'https://tailwindcss.com/' },
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
-                name: 'Radix Dialog (for mobile)',
+                name: 'Radix Dialog',
                 link: 'https://www.radix-ui.com/primitives/docs/components/dailog',
               },
             ]}>

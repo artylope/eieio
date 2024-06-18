@@ -6,7 +6,7 @@ const HighlightPopover = ({ coords, text, onSave }) => {
   if (!coords) return null;
 
   const popoverStyle = {
-    top: `${coords.top - 120}px`, // 1rem above the span
+    top: `${coords.top - 64}px`, // 1rem above the span
     left: `${coords.left}px`,
     transform: 'translateX(-50%)', // Center horizontally
     zIndex: 1000,

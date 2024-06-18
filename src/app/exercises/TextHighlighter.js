@@ -12,6 +12,8 @@ const TextHighlighter = () => {
   const [savedTags, setSavedTags] = useState(['Our attention is limited.']);
   const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
+  const highlightableRef = useRef(null);
+
   useEffect(() => {
     if (selectedText) {
       setIsPopoverVisible(true);
@@ -44,11 +46,53 @@ const TextHighlighter = () => {
     setIsPopoverVisible(false);
   };
 
+  // Prevent default iOS menu only when text is selected
+  const preventDefaultMenu = (event) => {
+    const selection = window.getSelection();
+    if (selection.toString().length > 0) {
+      event.preventDefault();
+    }
+  };
+
+  // Add event listener to prevent default iOS menu
+  useEffect(() => {
+    const highlightableElement = highlightableRef.current;
+    if (highlightableElement) {
+      highlightableElement.addEventListener('contextmenu', preventDefaultMenu);
+      highlightableElement.addEventListener('touchstart', preventDefaultMenu);
+      highlightableElement.addEventListener('touchend', preventDefaultMenu);
+      highlightableElement.addEventListener('touchmove', preventDefaultMenu);
+    }
+
+    return () => {
+      if (highlightableElement) {
+        highlightableElement.removeEventListener(
+          'contextmenu',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchstart',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchend',
+          preventDefaultMenu
+        );
+        highlightableElement.removeEventListener(
+          'touchmove',
+          preventDefaultMenu
+        );
+      }
+    };
+  }, []);
+
   return (
     <div className="bg-white rounded relative">
       <div className="flex flex-col w-full relative">
         <div className="flex flex-col lg:flex-row">
-          <article className="px-5 py-8 md:p-8 lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
+          <article
+            ref={highlightableRef}
+            className="px-5 py-8 md:p-8 lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
             <div className="leading-loose highlightable-text">
               <p>
                 Our attention is limited. There’s no way we can process the
