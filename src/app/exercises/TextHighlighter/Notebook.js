@@ -86,19 +86,8 @@ const Notebook = ({
                       </button>
                     </div>
                   </Dialog.Close>
-                  <div className="flex justify-end items-center mb-4">
-                    {savedTags.length === 0 ? (
-                      ''
-                    ) : (
-                      <button
-                        className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded hover:text-zinc-700"
-                        onClick={onClearAllTags}>
-                        <RotateCcw className="w-4 h-4" />{' '}
-                        <span className="px-1 text-sm">Clear all</span>
-                      </button>
-                    )}
-                  </div>
-                  <div className="gap-2 flex flex-wrap mt-3 justify-start">
+
+                  <div className="h-full grow">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
                         <Quote className="w-6 h-6 text-zinc-600 mb-2" />
@@ -110,13 +99,27 @@ const Notebook = ({
                         </p>
                       </div>
                     ) : (
-                      savedTags.map((tag, index) => (
-                        <HighlightTag
-                          key={index}
-                          text={tag}
-                          onRemove={onRemoveTag}
-                        />
-                      ))
+                      <div className="gap-2 flex flex-wrap mt-3 justify-start ">
+                        {savedTags.map((tag, index) => (
+                          <HighlightTag
+                            key={index}
+                            text={tag}
+                            onRemove={onRemoveTag}
+                          />
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex justify-center items-center m-4 border rounded">
+                    {savedTags.length === 0 ? (
+                      ''
+                    ) : (
+                      <button
+                        className="relative px-4 py-2 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded hover:text-zinc-700"
+                        onClick={onClearAllTags}>
+                        <RotateCcw className="w-4 h-4" />{' '}
+                        <span className="px-1 text-sm">Clear all</span>
+                      </button>
                     )}
                   </div>
                 </Dialog.Content>

@@ -20,6 +20,11 @@ const TextHighlighter = () => {
     }
   }, [selectedText]);
 
+  useEffect(() => {
+    setIsPopoverVisible(false);
+    setSelectedText('');
+  }, [isBottomSheetOpen]);
+
   const handleSaveTag = () => {
     if (selectedText && !savedTags.includes(selectedText)) {
       setSavedTags([...savedTags, selectedText]);
@@ -35,6 +40,8 @@ const TextHighlighter = () => {
 
   const handleClearAllTags = () => {
     setSavedTags([]);
+    setSelectedText('');
+    setIsPopoverVisible(false);
   };
 
   return (
