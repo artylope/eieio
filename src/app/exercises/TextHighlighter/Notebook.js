@@ -74,8 +74,8 @@ const Notebook = ({
                 animate="visible"
                 exit="exit"
                 variants={bottomSheetVariants}
-                className="fixed left-0 right-0 bottom-0 w-full">
-                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col min-h-[24rem] overflow-y-scroll">
+                className="fixed left-0 right-0 bottom-0 w-full overflow-y-scroll max-h-full">
+                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col ">
                   <Dialog.Close asChild>
                     <div className="flex justify-between items-center mb-8">
                       <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
@@ -87,7 +87,7 @@ const Notebook = ({
                     </div>
                   </Dialog.Close>
 
-                  <div className="h-full grow">
+                  <div className="grow pb-8">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
                         <Quote className="w-6 h-6 text-zinc-600 mb-2" />
@@ -110,7 +110,7 @@ const Notebook = ({
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-center items-center w-full">
+                  <div className="flex justify-center items-center w-full pb-8">
                     {savedTags.length === 0 ? (
                       ''
                     ) : (

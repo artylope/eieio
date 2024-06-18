@@ -1,11 +1,12 @@
 // components/HighlightPopover.js
 import React from 'react';
+import { Save } from 'lucide-react';
 
 const HighlightPopover = ({ coords, text, onSave }) => {
   if (!coords) return null;
 
   const popoverStyle = {
-    top: `${coords.top + coords.height + 32}px`, // 1rem above the span
+    top: `${coords.top - 120}px`, // 1rem above the span
     left: `${coords.left}px`,
     transform: 'translateX(-50%)', // Center horizontally
     zIndex: 1000,
@@ -13,7 +14,7 @@ const HighlightPopover = ({ coords, text, onSave }) => {
 
   return (
     <div
-      className="absolute bg-white border rounded-md shadow-md h-11 w-20 flex justify-center items-center"
+      className="absolute bg-white border rounded-md shadow-md h-11 w-20 flex justify-center items-center z-90"
       style={popoverStyle}>
       <div className="">
         <button
