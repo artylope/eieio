@@ -123,7 +123,7 @@ const TextHighlighter = () => {
         <div className="flex flex-col lg:flex-row">
           <article
             ref={highlightableRef}
-            className="px-5 py-8 md:p-8 lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
+            className="px-5 py-8 md:p-8  md:border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
             <div className="leading-loose highlightable-text">
               <p>
                 Our attention is limited. There’s no way we can process the
