@@ -75,7 +75,7 @@ const Notebook = ({
                 exit="exit"
                 variants={bottomSheetVariants}
                 className="fixed left-0 right-0 bottom-0 w-full overflow-y-scroll max-h-full">
-                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col ">
+                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col max-h-[75vh] overflow-y-auto">
                   <Dialog.Close asChild>
                     <div className="flex justify-between items-center mb-8">
                       <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
@@ -99,7 +99,7 @@ const Notebook = ({
                         </p>
                       </div>
                     ) : (
-                      <div className="gap-2 flex flex-wrap mt-3 justify-start ">
+                      <div className="gap-2 flex flex-wrap mt-3 justify-start">
                         {savedTags.map((tag, index) => (
                           <HighlightTag
                             key={index}
