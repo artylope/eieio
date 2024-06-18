@@ -1,6 +1,5 @@
 // components/HighlightPopover.js
 import React from 'react';
-import { Save } from 'lucide-react';
 
 const HighlightPopover = ({ coords, text, onSave }) => {
   if (!coords) return null;
