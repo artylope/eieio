@@ -188,8 +188,9 @@ const TextHighlighter = () => {
       </div>
 
       <Dialog.Root open={isBottomSheetOpen} onOpenChange={setIsBottomSheetOpen}>
-        <Dialog.Trigger className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 rounded-full  bg-white text-zinc-600 border shadow-lg gap-x-2 flex md:hidden justify-center items-center px-4 py-2">
-          <StickyNote className="w-5 h-5" /> Show saved phrases
+        <Dialog.Trigger className="absolute -bottom-5 left-1/2 transform -translate-x-1/2 rounded-full  bg-white text-zinc-600 hover:text-zinc-800 hover:-translate-y-1 hover:shadow-xl transition-all group border shadow-lg gap-x-2 flex md:hidden justify-center items-center px-4 py-2">
+          <StickyNote className="text-zinc-500 group-hover:text-zinc-700 group w-5 h-5 " />{' '}
+          Show saved phrases
         </Dialog.Trigger>
         <Dialog.Portal>
           <Dialog.Overlay className="fixed inset-0 bg-black opacity-50 md:hidden" />
