@@ -82,7 +82,7 @@ export default function Home() {
             id="5"
             date="16 June 2024"
             title="Highlight and save to notebook"
-            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click on save"
+            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click save"
             libraries={[
               { name: 'Tailwind CSS', link: 'https://tailwindcss.com/' },
               {
