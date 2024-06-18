@@ -141,7 +141,7 @@ const TextHighlighter = () => {
                 the same thing.
               </p>
             </div>
-            <span className="italic text-zinc-500 mt-4 text-sm">
+            <span className="italic text-zinc-500 mt-4 text-sm leading-relaxed">
               Edited excerpts from The Subtle Art of Not Giving A *uck by Mark
               Manson
             </span>
