@@ -63,15 +63,17 @@ const TextHighlighter = () => {
               Edited excerpts from The Subtle Art of Not Giving A *uck by Mark
               Manson
             </span>
-            {isPopoverVisible && (
-              <div ref={popoverRef}>
-                <HighlightPopover
-                  coords={selectionCoords}
-                  text={selectedText}
-                  onSave={handleSaveTag}
-                />
-              </div>
-            )}
+            <div>
+              {isPopoverVisible && (
+                <div ref={popoverRef}>
+                  <HighlightPopover
+                    coords={selectionCoords}
+                    text={selectedText}
+                    onSave={handleSaveTag}
+                  />
+                </div>
+              )}
+            </div>
           </article>
           <Notebook
             savedTags={savedTags}
