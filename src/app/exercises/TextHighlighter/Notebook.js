@@ -53,7 +53,7 @@ const Notebook = ({
               <span className="px-1 text-sm">Clear all</span>
             </button>
           </div>
-          <div className="gap-2 flex flex-wrap h-full overflow-y-auto px-5 md:px-8 md:pb-8 md:-mt-8">
+          <div className="gap-2 flex flex-wrap h-full md:overflow-y-auto px-5 md:px-8 md:pb-8 md:-mt-8">
             {savedTags.map((tag, index) => (
               <HighlightTag key={index} text={tag} onRemove={onRemoveTag} />
             ))}
@@ -75,7 +75,7 @@ const Notebook = ({
                 exit="exit"
                 variants={bottomSheetVariants}
                 className="fixed left-0 right-0 bottom-0 w-full overflow-y-scroll max-h-full">
-                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col max-h-[75vh] overflow-y-auto">
+                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col max-h-[75vh] overflow-y-hidden">
                   <Dialog.Close asChild>
                     <div className="flex justify-between items-center mb-2">
                       <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
@@ -87,7 +87,7 @@ const Notebook = ({
                     </div>
                   </Dialog.Close>
 
-                  <div className="grow pb-8">
+                  <div className="grow mb-4 pb-8 overflow-y-auto">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
                         <Quote className="w-6 h-6 text-zinc-600 mb-2" />
@@ -110,7 +110,7 @@ const Notebook = ({
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-center items-center w-full pb-8">
+                  <div className="flex justify-center items-center w-full pb-4 ">
                     {savedTags.length === 0 ? (
                       ''
                     ) : (
