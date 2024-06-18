@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { RotateCcw, X, Quote, StickyNote } from 'lucide-react';
 import HighlightTag from './HighlightTag';
 import * as Dialog from '@radix-ui/react-dialog';
@@ -11,6 +11,19 @@ const Notebook = ({
   isBottomSheetOpen,
   setIsBottomSheetOpen,
 }) => {
+  const tagsContainerRef = useRef(null);
+
+  useEffect(() => {
+    const tagsContainer = tagsContainerRef.current;
+    if (tagsContainer) {
+      const hasOverflow =
+        tagsContainer.scrollHeight > tagsContainer.clientHeight;
+      if (hasOverflow) {
+        tagsContainer.scrollIntoView({ behavior: 'smooth', block: 'end' });
+      }
+    }
+  }, [savedTags]);
+
   const bottomSheetVariants = {
     hidden: {
       y: '100%',
@@ -98,7 +111,9 @@ const Notebook = ({
                       </button>
                     )}
                   </div>
-                  <div className="grow mb-4 pb-8 overflow-y-auto">
+                  <div
+                    ref={tagsContainerRef}
+                    className="grow mb-4 pb-8 overflow-y-auto">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
                         <Quote className="w-6 h-6 text-zinc-600 mb-2" />

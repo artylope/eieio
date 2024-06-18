@@ -33,6 +33,7 @@ const TextHighlighter = () => {
       setIsPopoverVisible(false);
       setSelectedText('');
       setIsBottomSheetOpen(true);
+      removeAllCustomHighlights();
     }
   };
 
@@ -53,6 +54,36 @@ const TextHighlighter = () => {
       event.preventDefault();
     }
   };
+
+  const removeAllCustomHighlights = () => {
+    const customHighlights = document.querySelectorAll('.custom-highlight');
+    customHighlights.forEach((highlight) => {
+      const parent = highlight.parentNode;
+      while (highlight.firstChild) {
+        parent.insertBefore(highlight.firstChild, highlight);
+      }
+      parent.removeChild(highlight);
+    });
+  };
+
+  const handleClickOutside = (event) => {
+    if (
+      popoverRef.current &&
+      !popoverRef.current.contains(event.target) &&
+      !highlightableRef.current.contains(event.target)
+    ) {
+      setIsPopoverVisible(false);
+      setSelectedText('');
+      removeAllCustomHighlights();
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   // Add event listener to prevent default iOS menu
   useEffect(() => {
