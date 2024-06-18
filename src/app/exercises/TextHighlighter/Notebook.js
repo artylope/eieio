@@ -40,9 +40,9 @@ const Notebook = ({
 
   return (
     <>
-      <aside className="p-5 md:p-8 lg:w-1/3 flex-wrap justify-start items-start gap-y-3 md:gap-y-5 hidden md:flex">
+      <aside className="lg:w-1/3 flex-wrap justify-start items-start gap-y-3 md:gap-y-5 hidden md:flex md:max-h-[24rem] md:overflow-y-auto">
         <div className="gap-y-5 flex flex-col w-full">
-          <div className="w-full flex items-center justify-between">
+          <div className="w-full flex items-center justify-between sticky top-0 bg-gradient-to-b from-white via-white to-transparent dark:via-gray-900 dark:from-gray-900 dark:to-transparent  z-10 p-5 md:px-8 md:pt-8 md:pb-8">
             <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
               Notebook
             </h3>
@@ -53,7 +53,7 @@ const Notebook = ({
               <span className="px-1 text-sm">Clear all</span>
             </button>
           </div>
-          <div className="gap-2 flex flex-wrap">
+          <div className="gap-2 flex flex-wrap h-full overflow-y-auto px-5 md:px-8 md:pb-8 md:-mt-8">
             {savedTags.map((tag, index) => (
               <HighlightTag key={index} text={tag} onRemove={onRemoveTag} />
             ))}
