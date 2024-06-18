@@ -49,7 +49,7 @@ export default function Home() {
             title="Drag and Drop Sortable List"
             description="Drag and drop items to manage your list. Create, rename, delete, duplicate, and reorder items exactly how you want. Enjoy smooth animations as you organise!"
             libraries={[
-              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              { name: 'Tailwind CSS', link: 'https://tailwindcss.com/' },
               {
                 name: 'DnD Kit',
                 link: 'https://dndkit.com/',
@@ -81,9 +81,15 @@ export default function Home() {
           <Template
             id="5"
             date="16 June 2024"
-            title="Highlight to save"
-            description="Text heavy Interfaces often require interactions like highlight to save"
-            libraries={[]}>
+            title="Highlight and save to notebook"
+            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click on save"
+            libraries={[
+              { name: 'Tailwind CSS', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Dialog (for mobile)',
+                link: 'https://www.radix-ui.com/primitives/docs/components/dailog',
+              },
+            ]}>
             <TextHighlighter />
           </Template>
         </div>
