@@ -78,11 +78,11 @@ const Notebook = ({
                 <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col max-h-[75vh] overflow-y-hidden">
                   <Dialog.Close asChild>
                     <div className="flex justify-between items-center mb-2">
-                      <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
+                      <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-sm tracking-wide">
                         Notebook
                       </h3>
                       <button className="text-zinc-500 hover:text-zinc-700 w-8 h-8 flex justify-center items-center hover:bg-zinc-50 rounded">
-                        <X className="w-4 h-4" />
+                        <X className="w-5 h-5" />
                       </button>
                     </div>
                   </Dialog.Close>
