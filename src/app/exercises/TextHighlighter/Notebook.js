@@ -86,7 +86,18 @@ const Notebook = ({
                       </button>
                     </div>
                   </Dialog.Close>
-
+                  <div className="flex justify-end items-center w-full pb-4 ">
+                    {savedTags.length === 0 ? (
+                      ''
+                    ) : (
+                      <button
+                        className="relative mt-4 gap-x-1 flex flex-no-wrap justify-center items-center text-zinc-500 rounded hover:text-zinc-700"
+                        onClick={onClearAllTags}>
+                        <RotateCcw className="w-4 h-4" />{' '}
+                        <span className="px-1 text-sm">Clear all</span>
+                      </button>
+                    )}
+                  </div>
                   <div className="grow mb-4 pb-8 overflow-y-auto">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
@@ -108,18 +119,6 @@ const Notebook = ({
                           />
                         ))}
                       </div>
-                    )}
-                  </div>
-                  <div className="flex justify-center items-center w-full pb-4 ">
-                    {savedTags.length === 0 ? (
-                      ''
-                    ) : (
-                      <button
-                        className="relative border px-4 w-full py-2 gap-x-1 flex flex-no-wrap justify-center items-center text-zinc-500 rounded hover:text-zinc-700"
-                        onClick={onClearAllTags}>
-                        <RotateCcw className="w-4 h-4" />{' '}
-                        <span className="px-1 text-sm">Clear all</span>
-                      </button>
                     )}
                   </div>
                 </Dialog.Content>
