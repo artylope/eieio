@@ -77,7 +77,7 @@ const Notebook = ({
                 className="fixed left-0 right-0 bottom-0 w-full overflow-y-scroll max-h-full">
                 <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col max-h-[75vh] overflow-y-auto">
                   <Dialog.Close asChild>
-                    <div className="flex justify-between items-center mb-8">
+                    <div className="flex justify-between items-center mb-2">
                       <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
                         Notebook
                       </h3>
