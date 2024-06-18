@@ -50,7 +50,7 @@ const Template = ({ id, title, description, date, children, libraries }) => {
 
         <div className="flex flex-col gap-y-4 w-full">
           {' '}
-          <p className="text-zinc-500 max-w-2xl leading-relaxed">
+          <p className="text-zinc-500 max-w-2xl leading-relaxed my-4">
             {description}
           </p>{' '}
           <div className="text-zinc-500 flex gap-2 w-full justify-between">
