@@ -19,7 +19,7 @@ export default function Home() {
             description="The slider component that controls the text size with dynamic text input"
             libraries={[
               {
-                name: 'Tailwind CSS',
+                name: 'Tailwind',
                 link: 'https://tailwindcss.com/',
               },
               {
@@ -36,7 +36,7 @@ export default function Home() {
             description="Card loading skeleton until the content is ready and loaded"
             libraries={[
               {
-                name: 'Tailwind CSS',
+                name: 'Tailwind',
                 link: 'https://tailwindcss.com/',
               },
             ]}>
@@ -81,9 +81,15 @@ export default function Home() {
           <Template
             id="5"
             date="16 June 2024"
-            title="Highlight to save"
-            description="Text heavy Interfaces often require interactions like highlight to save"
-            libraries={[]}>
+            title="Highlight and save to notebook"
+            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click save"
+            libraries={[
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Dialog',
+                link: 'https://www.radix-ui.com/primitives/docs/components/dailog',
+              },
+            ]}>
             <TextHighlighter />
           </Template>
         </div>

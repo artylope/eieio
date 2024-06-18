@@ -1,45 +1,18 @@
-// pages/index.js
 'use client';
 import { useState, useEffect, useRef } from 'react';
 import useTextSelection from './TextHighlighter/utils/useTextSelection';
 import HighlightPopover from './TextHighlighter/HighlightPopover';
-import HighlightTag from './TextHighlighter/HighlightTag';
-
-import { Delete, RotateCcw } from 'lucide-react';
+import Notebook from './TextHighlighter/Notebook';
 
 const TextHighlighter = () => {
   const { selectionCoords, selectedText, setSelectedText } = useTextSelection();
   const [isPopoverVisible, setIsPopoverVisible] = useState(false);
   const popoverRef = useRef(null);
 
-  const [savedTags, setSavedTags] = useState([]);
+  const [savedTags, setSavedTags] = useState(['Our attention is limited.']);
+  const [isBottomSheetOpen, setIsBottomSheetOpen] = useState(false);
 
-  // Function to check if clicked outside of popover
-  const handleClickOutside = (event) => {
-    if (popoverRef.current && !popoverRef.current.contains(event.target)) {
-      setIsPopoverVisible(false);
-      setSelectedText(''); // unhighlight the selected text
-
-      // Remove the highlight
-      document.querySelectorAll('.custom-highlight').forEach((span) => {
-        const parent = span.parentNode;
-        while (span.firstChild) parent.insertBefore(span.firstChild, span);
-        parent.removeChild(span);
-      });
-
-      window.getSelection().removeAllRanges(); // Clear the selection
-    }
-  };
-
-  // Add event listener for clicks
-  useEffect(() => {
-    document.addEventListener('mousedown', handleClickOutside);
-    document.addEventListener('touchstart', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-      document.removeEventListener('touchstart', handleClickOutside);
-    };
-  }, []);
+  const highlightableRef = useRef(null);
 
   useEffect(() => {
     if (selectedText) {
@@ -49,20 +22,17 @@ const TextHighlighter = () => {
     }
   }, [selectedText]);
 
+  useEffect(() => {
+    setIsPopoverVisible(false);
+    setSelectedText('');
+  }, [isBottomSheetOpen]);
+
   const handleSaveTag = () => {
     if (selectedText && !savedTags.includes(selectedText)) {
       setSavedTags([...savedTags, selectedText]);
-      setIsPopoverVisible(false); // hide the popover
+      setIsPopoverVisible(false);
       setSelectedText('');
-
-      // Remove the highlight
-      document.querySelectorAll('.custom-highlight').forEach((span) => {
-        const parent = span.parentNode;
-        while (span.firstChild) parent.insertBefore(span.firstChild, span);
-        parent.removeChild(span);
-      });
-
-      window.getSelection().removeAllRanges(); // Clear the selection
+      setIsBottomSheetOpen(true);
     }
   };
 
@@ -72,6 +42,8 @@ const TextHighlighter = () => {
 
   const handleClearAllTags = () => {
     setSavedTags([]);
+    setSelectedText('');
+    setIsPopoverVisible(false);
   };
 
   // Prevent default iOS menu only when text is selected
@@ -84,7 +56,7 @@ const TextHighlighter = () => {
 
   // Add event listener to prevent default iOS menu
   useEffect(() => {
-    const highlightableElement = document.querySelector('.highlightable-text');
+    const highlightableElement = highlightableRef.current;
     if (highlightableElement) {
       highlightableElement.addEventListener('contextmenu', preventDefaultMenu);
       highlightableElement.addEventListener('touchstart', preventDefaultMenu);
@@ -115,16 +87,15 @@ const TextHighlighter = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded">
+    <div className="bg-white rounded relative">
       <div className="flex flex-col w-full relative">
         <div className="flex flex-col lg:flex-row">
-          <article className="p-5 md:p-8 border-b lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
-            <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
-              Highlight to save phrases
-            </h3>
-            <div className="leading-loose">
-              <p className="highlight:bg-yellow-200 highlightable-text">
-                But our attention is limited. There’s no way we can process the
+          <article
+            ref={highlightableRef}
+            className="px-5 py-8 md:p-8 lg:border-r lg:border-b-transparent flex grow lg:w-2/3 relative flex-col gap-y-3  md:gap-y-5">
+            <div className="leading-loose highlightable-text">
+              <p>
+                Our attention is limited. There’s no way we can process the
                 tidal waves of information flowing past us constantly.
                 Therefore, the only zeroes and ones that break through and catch
                 our attention are the truly exceptional pieces of information.
@@ -139,8 +110,9 @@ const TextHighlighter = () => {
                 the same thing.
               </p>
             </div>
-            <span className="italic text-zinc-500 mt-8 text-sm">
-              Excerpts from The Subtle Art of Not Giving A Fuck by Mark Manson
+            <span className="italic text-zinc-500 mt-4 text-sm">
+              Edited excerpts from The Subtle Art of Not Giving A *uck by Mark
+              Manson
             </span>
             <div>
               {isPopoverVisible && (
@@ -154,34 +126,13 @@ const TextHighlighter = () => {
               )}
             </div>
           </article>
-          <aside className="p-5 md:p-8 lg:w-1/3  flex  flex-wrap justify-start items-start gap-y-3  md:gap-y-5">
-            <div className="gap-y-5 flex flex-col w-full ">
-              <div className="w-full flex items-center justify-between ">
-                <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
-                  Phrases you saved
-                </h3>
-
-                <button
-                  className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
-                  onClick={handleClearAllTags}>
-                  <RotateCcw className="w-4 h-4" />{' '}
-                  <span className="px-1 text-sm">Clear all</span>
-                </button>
-              </div>
-
-              <div className="gap-2 flex flex-wrap">
-                {' '}
-                {savedTags.map((tag, index) => (
-                  <HighlightTag
-                    key={index}
-                    text={tag}
-                    onRemove={handleRemoveTag}
-                  />
-                ))}
-              </div>
-            </div>
-            {/* side panel for highlighted text */}
-          </aside>
+          <Notebook
+            savedTags={savedTags}
+            onRemoveTag={handleRemoveTag}
+            onClearAllTags={handleClearAllTags}
+            isBottomSheetOpen={isBottomSheetOpen}
+            setIsBottomSheetOpen={setIsBottomSheetOpen}
+          />
         </div>
       </div>
     </div>
