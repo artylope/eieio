@@ -75,14 +75,14 @@ const Notebook = ({
                 exit="exit"
                 variants={bottomSheetVariants}
                 className="fixed left-0 right-0 bottom-0 w-full">
-                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col min-h-[24rem]">
+                <Dialog.Content className="bg-white p-5 rounded-t-lg md:hidden flex flex-col min-h-[24rem] overflow-y-scroll">
                   <Dialog.Close asChild>
                     <div className="flex justify-between items-center mb-8">
                       <h3 className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
                         Notebook
                       </h3>
-                      <button className="text-zinc-500 hover:text-zinc-700">
-                        <X className="w-6 h-6" />
+                      <button className="text-zinc-500 hover:text-zinc-700 w-8 h-8 flex justify-center items-center hover:bg-zinc-50 rounded">
+                        <X className="w-4 h-4" />
                       </button>
                     </div>
                   </Dialog.Close>
@@ -110,12 +110,12 @@ const Notebook = ({
                       </div>
                     )}
                   </div>
-                  <div className="flex justify-center items-center m-4 border rounded">
+                  <div className="flex justify-center items-center w-full">
                     {savedTags.length === 0 ? (
                       ''
                     ) : (
                       <button
-                        className="relative px-4 py-2 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded hover:text-zinc-700"
+                        className="relative border px-4 w-full py-2 gap-x-1 flex flex-no-wrap justify-center items-center text-zinc-500 rounded hover:text-zinc-700"
                         onClick={onClearAllTags}>
                         <RotateCcw className="w-4 h-4" />{' '}
                         <span className="px-1 text-sm">Clear all</span>
