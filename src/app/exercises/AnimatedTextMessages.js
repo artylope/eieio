@@ -57,8 +57,8 @@ const MessageContainer = ({ message, dateTime, isOutgoing }) => {
           className={`relative  rounded-lg p-4 max-w-xs leading-tight
              ${
                isOutgoing
-                 ? 'bg-green-300 text-gray-950 message-reply ml-16'
-                 : 'bg-zinc-100 text-zinc-950 message-default mr-16'
+                 ? 'bg-green-300 text-gray-950 message-outgoing ml-16'
+                 : 'bg-zinc-100 text-zinc-950 message-incoming mr-16'
              } `}>
           <div dangerouslySetInnerHTML={{ __html: formattedMessage }} />
         </div>
