@@ -113,7 +113,7 @@ const Notebook = ({
                   </div>
                   <div
                     ref={tagsContainerRef}
-                    className="grow px-5 mb-4 pb-8 overflow-y-auto">
+                    className="grow px-5 mb-4 pb-16 overflow-y-auto">
                     {savedTags.length === 0 ? (
                       <div className="flex flex-col grow justify-center items-center h-full w-full gap-y-2 mt-4">
                         <Quote className="w-6 h-6 text-zinc-600 mb-2" />
