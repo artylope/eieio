@@ -1,13 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import * as Toast from '@radix-ui/react-toast';
-
-import { Share2 } from 'lucide-react';
+import { Share2, Check } from 'lucide-react';
 
 const Template = ({ id, title, description, date, children, libraries }) => {
   const router = useRouter();
-  const [toastOpen, setToastOpen] = useState(false);
+  const [isCopied, setIsCopied] = useState(false);
 
   const LibraryLinks = ({ libraries }) => {
     return (
@@ -15,7 +13,7 @@ const Template = ({ id, title, description, date, children, libraries }) => {
         {libraries.map((library, index) => (
           <div
             key={index}
-            className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex  justify-start items-center px-2 py-1 text-sm rounded">
+            className="bg-zinc-100 text-zinc-500 hover:bg-zinc-100 hover:text-zinc-800 flex justify-start items-center px-2 py-1 text-sm rounded">
             <a href={library.link} target="_blank" rel="noopener noreferrer">
               {library.name}
             </a>
@@ -31,7 +29,12 @@ const Template = ({ id, title, description, date, children, libraries }) => {
     let url = `${currentPath}/#exercise${id}`;
     console.log(url);
     navigator.clipboard.writeText(url);
-    setToastOpen(true);
+    setIsCopied(true);
+
+    // Revert back to the original state after 2 seconds
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 2000);
   }
 
   return (
@@ -60,23 +63,21 @@ const Template = ({ id, title, description, date, children, libraries }) => {
             </div>
             <div className="relative">
               <button
-                className="relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center text-zinc-500 rounded  hover:text-zinc-700"
+                className={`relative py-1 gap-x-1 flex flex-no-wrap justify-start items-center  rounded  ${
+                  isCopied
+                    ? 'bg-zinc-800 text-white px-2 hover:text-white'
+                    : 'text-zinc-500 hover:text-zinc-700'
+                } `}
                 onClick={handleShareButton}>
-                <Share2 className="w-4 h-4" />{' '}
-                <span className="px-1 text-sm">Copy Link</span>
+                {isCopied ? (
+                  <Check className="w-4 h-4" />
+                ) : (
+                  <Share2 className="w-4 h-4" />
+                )}{' '}
+                <span className="px-1 text-sm">
+                  {isCopied ? 'Copied' : 'Copy Link'}
+                </span>
               </button>
-              <div className="absolute z-50">
-                <Toast.Provider swipeDirection="right">
-                  <Toast.Root
-                    open={toastOpen}
-                    onOpenChange={setToastOpen}
-                    duration={1000}
-                    className=" bg-zinc-800 text-white px-4 py-2 rounded shadow-lg flex items-center gap-x-2">
-                    <Toast.Title>Copied !</Toast.Title>
-                  </Toast.Root>
-                  <Toast.Viewport className="-translate-y-20 w-24 flex justify-center items-center" />
-                </Toast.Provider>
-              </div>
             </div>
           </div>
         </div>
