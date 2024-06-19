@@ -1,5 +1,28 @@
 'use client';
+import { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
+
+const useInView = (options) => {
+  const [isIntersecting, setIntersecting] = useState(false);
+  const ref = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => setIntersecting(entry.isIntersecting),
+      options
+    );
+    if (ref.current) {
+      observer.observe(ref.current);
+    }
+    return () => {
+      if (ref.current) {
+        observer.unobserve(ref.current);
+      }
+    };
+  }, [options]);
+
+  return [ref, isIntersecting];
+};
 
 const MessageContainer = ({ message, dateTime, isReply }) => {
   // Replace newline characters with <br /> tags
@@ -40,6 +63,10 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
 };
 
 const AnimatedTextMessages = () => {
+  const [ref, isIntersecting] = useInView({
+    threshold: 0.1, // Adjust this value as needed
+  });
+
   const ThreadedContainerVariants = {
     initial: { opacity: 0 },
     animate: {
@@ -53,9 +80,10 @@ const AnimatedTextMessages = () => {
   return (
     <div className="bg-white w-full flex justify-center items-center py-8">
       <motion.div
+        ref={ref}
         variants={ThreadedContainerVariants}
         initial="initial"
-        animate="animate"
+        animate={isIntersecting ? 'animate' : 'initial'}
         className="flex flex-col gap-y-2">
         <MessageContainer
           message={`On my own \n pretending he's beside me`}
