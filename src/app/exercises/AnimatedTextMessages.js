@@ -107,7 +107,7 @@ const AnimatedTextMessages = () => {
   };
 
   return (
-    <div className="bg-white w-full flex justify-center items-center rounded p-2 pt-4 pb-16 md:pt-8 relative">
+    <div className="bg-white w-full transition-all min-h-[22rem] flex justify-center items-center rounded p-2 pt-4 pb-16 md:pt-8 relative">
       <AnimatePresence>
         {visible && (
           <motion.div
@@ -141,10 +141,10 @@ const AnimatedTextMessages = () => {
           </motion.div>
         )}
       </AnimatePresence>
-      <div className="absolute bottom-2 right-2 md:bottom-4 md:right-4 lg:bottom-8 lg:right-8">
+      <div className="absolute top-2 right-2 md:top-4 md:right-4 lg:top-8 lg:right-8">
         <button
           onClick={handleReplay}
-          className="bg-zinc-900 rounded-full w-12 h-12 text-white flex justify-center items-center shadow-lg transition-all hover:-translate-y-1 hover:bg-zinc-800">
+          className="bg-zinc-900 rounded-full w-12 h-12 text-white flex justify-center items-center shadow-lg transition-all hover:-translate-y-1 active:translate-y-0 hover:bg-zinc-800">
           <Play className="w-4 h-4" />
         </button>
       </div>
