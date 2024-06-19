@@ -4,6 +4,7 @@ import SkeletonCard from '@/app/exercises/SkeletonCard';
 import Sortable from '@/app/exercises/Sortable';
 import Downloader from '@/app/exercises/Downloader';
 import TextHighlighter from '@/app/exercises/TextHighlighter';
+import AnimatedTextMessages from './exercises/AnimatedTextMessages';
 
 import Template from '@/app/exercises/Template';
 
@@ -91,6 +92,20 @@ export default function Home() {
               },
             ]}>
             <TextHighlighter />
+          </Template>
+          <Template
+            id="6"
+            date="19 June 2024"
+            title="Animated text messages"
+            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click save"
+            libraries={[
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Dialog',
+                link: 'https://www.radix-ui.com/primitives/docs/components/dailog',
+              },
+            ]}>
+            <AnimatedTextMessages />
           </Template>
         </div>
       </div>

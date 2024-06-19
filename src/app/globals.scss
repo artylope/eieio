@@ -85,4 +85,29 @@
   .custom-highlight {
     @apply bg-yellow-200;
   }
+
+  /* Add this CSS to your global styles or a relevant CSS file */
+  .message-default::before,
+  .message-reply::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-style: solid;
+  }
+
+  .message-default::before {
+    left: 8px;
+    bottom: -8px;
+    border-width: 10px 10px 0 0;
+    border-color: rgb(244 244 245) transparent transparent transparent; /* Adjust color to match the bg color */
+  }
+
+  .message-reply::before {
+    right: 8px;
+    bottom: -8px;
+    border-width: 10px 0 0 10px;
+    border-color: rgb(134 239 172) transparent transparent transparent; /* Adjust color to match the reply bg color */
+  }
 }
