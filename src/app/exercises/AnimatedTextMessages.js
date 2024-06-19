@@ -24,7 +24,7 @@ const useInView = (options) => {
   return [ref, isIntersecting];
 };
 
-const MessageContainer = ({ message, dateTime, isReply }) => {
+const MessageContainer = ({ message, dateTime, isOutgoing }) => {
   // Replace newline characters with <br /> tags
   const formattedMessage = message.replace(/\n/g, '<br />');
 
@@ -50,13 +50,15 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
         </div>
       )}
       <div
-        className={`flex w-full ${isReply ? 'justify-end ' : 'justify-start'}`}>
+        className={`flex w-full ${
+          isOutgoing ? 'justify-end ' : 'justify-start'
+        }`}>
         <div
-          className={`relative text-zinc-800 rounded-lg p-4 max-w-sm leading-tight
+          className={`relative  rounded-lg p-4 max-w-xs leading-tight
              ${
-               isReply
-                 ? 'bg-green-300 message-reply ml-16'
-                 : 'bg-zinc-100 message-default mr-16'
+               isOutgoing
+                 ? 'bg-green-300 text-gray-950 message-reply ml-16'
+                 : 'bg-zinc-100 text-zinc-950 message-default mr-16'
              } `}>
           <div dangerouslySetInnerHTML={{ __html: formattedMessage }} />
         </div>
@@ -94,7 +96,7 @@ const AnimatedTextMessages = () => {
         />
         <MessageContainer
           message={`All the shine of a thousand spotlights. All the stars we steal from the night sky.`}
-          isReply={true}
+          isOutgoing={true}
         />
         <MessageContainer
           message={`You want to meet at the library later`}
@@ -102,7 +104,7 @@ const AnimatedTextMessages = () => {
         />
         <MessageContainer
           message={`Yea sure! See you there at 11`}
-          isReply={true}
+          isOutgoing={true}
         />
       </motion.div>
     </div>
