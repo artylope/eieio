@@ -1,6 +1,6 @@
 'use client';
 import { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, spring } from 'framer-motion';
 
 const useInView = (options) => {
   const [isIntersecting, setIntersecting] = useState(false);
@@ -29,12 +29,12 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
   const formattedMessage = message.replace(/\n/g, '<br />');
 
   const MessageVariants = {
-    initial: { opacity: 0, y: 20 },
+    initial: { opacity: 0, y: 80 },
     animate: {
       opacity: 1,
       y: 0,
       transition: {
-        duration: 0.5,
+        duration: 0.3,
         ease: 'easeOut',
       },
     },
@@ -52,9 +52,12 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
       <div
         className={`flex w-full ${isReply ? 'justify-end ' : 'justify-start'}`}>
         <div
-          className={`bg-zinc-100 text-zinc-800 rounded-lg p-4 w-[20rem] ${
-            isReply ? 'bg-green-300 ' : ''
-          }`}>
+          className={`relative  text-zinc-800 rounded-lg p-4 w-[20rem]
+             ${
+               isReply
+                 ? 'bg-green-300 message-reply'
+                 : 'bg-zinc-100 message-default'
+             } `}>
           <div dangerouslySetInnerHTML={{ __html: formattedMessage }} />
         </div>
       </div>
@@ -72,7 +75,7 @@ const AnimatedTextMessages = () => {
     animate: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.5,
+        staggerChildren: 0.4,
       },
     },
   };
