@@ -43,7 +43,7 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
   return (
     <motion.div
       variants={MessageVariants}
-      className="flex flex-col gap-y-2 w-[26rem]">
+      className="flex flex-col gap-y-2 w-full">
       {dateTime && (
         <div className="w-full flex justify-center items-center mt-2">
           <span className="text-xs text-zinc-400">{dateTime}</span>
@@ -52,11 +52,11 @@ const MessageContainer = ({ message, dateTime, isReply }) => {
       <div
         className={`flex w-full ${isReply ? 'justify-end ' : 'justify-start'}`}>
         <div
-          className={`relative  text-zinc-800 rounded-lg p-4 w-[20rem]
+          className={`relative text-zinc-800 rounded-lg p-4 max-w-sm leading-tight
              ${
                isReply
-                 ? 'bg-green-300 message-reply'
-                 : 'bg-zinc-100 message-default'
+                 ? 'bg-green-300 message-reply ml-16'
+                 : 'bg-zinc-100 message-default mr-16'
              } `}>
           <div dangerouslySetInnerHTML={{ __html: formattedMessage }} />
         </div>
@@ -81,7 +81,7 @@ const AnimatedTextMessages = () => {
   };
 
   return (
-    <div className="bg-white w-full flex justify-center items-center rounded py-8">
+    <div className="bg-white w-full flex justify-center items-center rounded p-2 py-8">
       <motion.div
         ref={ref}
         variants={ThreadedContainerVariants}
@@ -89,11 +89,11 @@ const AnimatedTextMessages = () => {
         animate={isIntersecting ? 'animate' : 'initial'}
         className="flex flex-col gap-y-2">
         <MessageContainer
-          message={`On my own \n pretending he's beside me`}
+          message={`On my own, pretending he's beside me`}
           dateTime="11 June, 10:29 AM"
         />
         <MessageContainer
-          message={`All the shine of a thousand spotlights \n All the stars we steal from the night sky`}
+          message={`All the shine of a thousand spotlights. All the stars we steal from the night sky.`}
           isReply={true}
         />
         <MessageContainer
