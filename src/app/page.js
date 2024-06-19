@@ -97,12 +97,12 @@ export default function Home() {
             id="6"
             date="19 June 2024"
             title="Animated text messages"
-            description="Text heavy interfaces (e.g. e-books) often require interactions like highlight to save so that users can store important pieces of information they want to refer to in future. Highlight the phrases you want and click save"
+            description="A practice of making text messages appearing one after another"
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
-                name: 'Radix Dialog',
-                link: 'https://www.radix-ui.com/primitives/docs/components/dailog',
+                name: 'Framer Motion',
+                link: 'https://www.framer.com/motion/introduction/',
               },
             ]}>
             <AnimatedTextMessages />
