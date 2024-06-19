@@ -110,4 +110,24 @@
     border-width: 10px 0 0 10px;
     border-color: rgb(134 239 172) transparent transparent transparent; /* Adjust color to match the reply bg color */
   }
+
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  ::-webkit-scrollbar-track-piece {
+    background-color: #fff;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-zinc-300;
+    outline: 2px solid #fff;
+    outline-offset: -2px;
+    border: 0.1px solid #b7b7b7;
+    border-radius: 8px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-zinc-400;
+  }
 }
