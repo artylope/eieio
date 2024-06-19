@@ -81,7 +81,7 @@ const AnimatedTextMessages = () => {
   };
 
   return (
-    <div className="bg-white w-full flex justify-center items-center py-8">
+    <div className="bg-white w-full flex justify-center items-center rounded py-8">
       <motion.div
         ref={ref}
         variants={ThreadedContainerVariants}
