@@ -5,6 +5,7 @@ import Sortable from '@/app/exercises/Sortable';
 import Downloader from '@/app/exercises/Downloader';
 import TextHighlighter from '@/app/exercises/TextHighlighter';
 import AnimatedTextMessages from './exercises/AnimatedTextMessages';
+import CoolMenu from '@/app/exercises/CoolMenu';
 
 import Template from '@/app/exercises/Template';
 
@@ -106,6 +107,20 @@ export default function Home() {
               },
             ]}>
             <AnimatedTextMessages />
+          </Template>
+          <Template
+            id="7"
+            date="7 July 2024"
+            title="Cool minimalist menu"
+            description="A cool minimalist menu with tooltips, for use in high touch interfaces with recurring users"
+            libraries={[
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Tooltip',
+                link: 'https://www.radix-ui.com/primitives/docs/components/tooltip',
+              },
+            ]}>
+            <CoolMenu />
           </Template>
         </div>
       </div>
