@@ -6,13 +6,14 @@ import Downloader from '@/app/exercises/Downloader';
 import TextHighlighter from '@/app/exercises/TextHighlighter';
 import AnimatedTextMessages from './exercises/AnimatedTextMessages';
 import CoolMenu from '@/app/exercises/CoolMenu';
+import ChartCard from '@/app/exercises/ChartCard';
 
 import Template from '@/app/exercises/Template';
 
 export default function Home() {
   return (
     <div>
-      <div className="flex grow py-8 ">
+      <div className="flex py-8 grow ">
         <div className="container mx-auto grow">
           <Template
             id="1"
@@ -121,6 +122,20 @@ export default function Home() {
               },
             ]}>
             <CoolMenu />
+          </Template>
+          <Template
+            id="7"
+            date="22 Sep 2024"
+            title="Chart"
+            description="Chart"
+            libraries={[
+              { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Tooltip',
+                link: 'https://www.radix-ui.com/primitives/docs/components/tooltip',
+              },
+            ]}>
+            <ChartCard />
           </Template>
         </div>
       </div>
