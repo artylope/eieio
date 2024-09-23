@@ -127,9 +127,13 @@ export default function Home() {
             id="7"
             date="22 Sep 2024"
             title="Chart"
-            description="Chart"
+            description="Data visualisation of step count daily, weekly, and monthly."
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+              {
+                name: 'Radix Tabs',
+                link: 'https://www.radix-ui.com/primitives/docs/components/tabs',
+              },
               {
                 name: 'Recharts',
                 link: 'https://recharts.org/en-US/',
