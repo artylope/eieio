@@ -37,7 +37,7 @@ const BaseChart = ({
 }) => {
   return (
     <BarChart
-      width={400}
+      width={396}
       height={400}
       data={data}
       margin={{ top: 40, right: 0, left: -24, bottom: 40 }}>
