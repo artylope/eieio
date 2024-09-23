@@ -55,13 +55,13 @@ const weekData = [
 // Data for the "Month" chart (steps per day in September)
 const monthData = Array.from({ length: 30 }, (v, i) => ({
   day: `${i + 1} Sep`,
-  steps: Math.floor(Math.random() * 15000 + 5000), // Random steps between 5000 and 20000
+  steps: Math.floor(Math.random() * 10000 + 5000), // Random steps between 5000 and 20000
 }));
 
-const Chart = ({ type, title, count, data }) => (
-  <div className="flex flex-col py-4 gap-y-2">
+const ChartHeader = ({ title, count }) => (
+  <div className="flex flex-col gap-y-2">
     <div className="">
-      <div>{title}</div>
+      <div className="text-zinc-600">{title}</div>
       <div className="flex items-end justify-start gap-x-2">
         <h1 className="text-6xl font-semibold tracking-tight text-zinc-900">
           {count.toLocaleString()}
@@ -69,67 +69,11 @@ const Chart = ({ type, title, count, data }) => (
         <span className="mb-0.5">steps</span>
       </div>
     </div>
-    <div className="py-8 -ml-3 text-xs text-zinc-500">
-      {type === 'day' && (
-        <BarChart width={400} height={300} data={dayData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="hour" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="steps" fill="#8884d8">
-            <LabelList dataKey="steps" position="top" />
-          </Bar>
-        </BarChart>
-      )}
-      {type === 'week' && (
-        <BarChart width={400} height={300} data={weekData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="steps" fill="#82ca9d">
-            <LabelList dataKey="steps" position="top" />
-          </Bar>
-        </BarChart>
-      )}
-      {type === 'month' && (
-        <BarChart width={400} height={300} data={monthData}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis dataKey="day" />
-          <YAxis />
-          <Tooltip />
-          <Bar dataKey="steps" fill="#ffc658">
-            <LabelList dataKey="steps" position="top" />
-          </Bar>
-        </BarChart>
-      )}
-    </div>
   </div>
 );
 
 const ChartCard = () => {
   const [value, setValue] = useState('day'); // Default value is 'day'
-
-  // Mapping constant for chart data/components based on the selected tab
-  const chartComponents = {
-    day: <Chart type="day" title="Total today" count={9273} data={dayData} />,
-    week: (
-      <Chart
-        type="week"
-        title="Daily average this week"
-        count={14273}
-        data={weekData}
-      />
-    ),
-    month: (
-      <Chart
-        type="month"
-        title="Daily average this month"
-        count={12356}
-        data={monthData}
-      />
-    ),
-  };
 
   return (
     <div className="flex items-center justify-center p-8">
@@ -169,36 +113,39 @@ const ChartCard = () => {
           </div>
 
           {/* Rendering the relevant chart based on the selected tab */}
-          <Tabs.Content value="day" className="py-4 text-zinc-700">
+          <Tabs.Content value="day" className="py-8 text-zinc-700">
+            <ChartHeader title="Total today" count={9273} />
             <BaseChart
               data={dayData}
               xAxisKey="hour"
               yAxisLabel="Number of Steps"
               xAxisLabel="Hour"
-              barColor="#8884d8"
               dataKey="steps"
+              yAxisTickFormatter={(value) => `${(value / 1000).toFixed(1)}k`}
             />
           </Tabs.Content>
 
-          <Tabs.Content value="week" className="py-4 text-zinc-700">
+          <Tabs.Content value="week" className="py-8 text-zinc-700">
+            <ChartHeader title="Daily average this week" count={14273} />
             <BaseChart
               data={weekData}
               xAxisKey="day"
               yAxisLabel="Number of Steps"
               xAxisLabel="Day of the Week"
-              barColor="#82ca9d"
               dataKey="steps"
+              yAxisTickFormatter={(value) => `${Math.round(value / 1000)}k`}
             />
           </Tabs.Content>
 
-          <Tabs.Content value="month" className="py-4 text-zinc-700">
+          <Tabs.Content value="month" className="py-8 text-zinc-700">
+            <ChartHeader title="Daily average this month" count={12356} />
             <BaseChart
               data={monthData}
               xAxisKey="day"
               yAxisLabel="Number of Steps"
               xAxisLabel="Day of the Month"
-              barColor="#ffc658"
               dataKey="steps"
+              yAxisTickFormatter={(value) => `${Math.round(value / 1000)}k`}
             />
           </Tabs.Content>
         </Tabs.Root>

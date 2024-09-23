@@ -131,8 +131,8 @@ export default function Home() {
             libraries={[
               { name: 'Tailwind', link: 'https://tailwindcss.com/' },
               {
-                name: 'Radix Tooltip',
-                link: 'https://www.radix-ui.com/primitives/docs/components/tooltip',
+                name: 'Recharts',
+                link: 'https://recharts.org/en-US/',
               },
             ]}>
             <ChartCard />
