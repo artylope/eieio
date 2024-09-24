@@ -89,7 +89,7 @@ const monthData = [
 const ChartHeader = ({ title, count }) => (
   <div className="flex flex-col gap-y-2">
     <div className="">
-      <div className="text-zinc-600">{title}</div>
+      <div className="text-zinc-600 ">{title}</div>
       <div className="flex items-end justify-start gap-x-2">
         <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl text-zinc-900">
           {count.toLocaleString()}
