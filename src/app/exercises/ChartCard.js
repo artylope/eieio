@@ -93,8 +93,8 @@ const ChartCard = () => {
   const monthAverage = calculateAverage(monthData);
 
   return (
-    <div className="flex items-center justify-center p-4 sm:p-8">
-      <div className="bg-white border rounded-xl shadow-xl h-[36rem] w-full sm:w-[28rem] p-6">
+    <div className="flex items-center justify-center px-0 sm:p-8">
+      <div className="bg-white sm:border rounded-xl sm:shadow-xl h-[36rem] w-full sm:w-[28rem] p-6">
         <Tabs.Root value={value} onValueChange={setValue}>
           <div className="flex items-center justify-between">
             <h2 className="text-lg font-semibold sm:text-2xl text-zinc-900">

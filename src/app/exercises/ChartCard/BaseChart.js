@@ -49,7 +49,7 @@ const BaseChart = ({
       width={chartWidth}
       height={400}
       data={data}
-      margin={{ top: 40, right: 8, left: -28, bottom: 40 }}>
+      margin={{ top: 40, right: 8, left: -24, bottom: 40 }}>
       <CartesianGrid
         strokeDasharray={gridDashArray}
         stroke={gridColor}
