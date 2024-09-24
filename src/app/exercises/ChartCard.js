@@ -3,6 +3,12 @@ import React, { useState, useEffect } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
 import BaseChart from '@/app/exercises/ChartCard/BaseChart';
 
+// Utility function to calculate average
+const calculateAverage = (data) => {
+  const totalSteps = data.reduce((sum, item) => sum + item.steps, 0);
+  return (totalSteps / data.length).toFixed(0);
+};
+
 // Data for the "Day" chart (hourly data)
 const dayData = [
   { hour: '12 AM', steps: 200 },
@@ -81,6 +87,11 @@ const ChartCard = () => {
     };
   }, []);
 
+  // Calculate the average for day, week, and month data
+  const dayAverage = calculateAverage(dayData);
+  const weekAverage = calculateAverage(weekData);
+  const monthAverage = calculateAverage(monthData);
+
   return (
     <div className="flex items-center justify-center p-4 sm:p-8">
       <div className="bg-white border rounded-xl shadow-xl h-[36rem] w-full sm:w-[28rem] p-6">
@@ -131,6 +142,7 @@ const ChartCard = () => {
               xAxisLabel="Hour"
               dataKey="steps"
               yAxisTickFormatter={(value) => `${(value / 1000).toFixed(1)}k`}
+              averageValue={dayAverage} // Pass calculated average
             />
           </Tabs.Content>
 
@@ -144,6 +156,7 @@ const ChartCard = () => {
               xAxisLabel="Day of the Week"
               dataKey="steps"
               yAxisTickFormatter={(value) => `${Math.round(value / 1000)}k`}
+              averageValue={weekAverage} // Pass calculated average
             />
           </Tabs.Content>
 
@@ -157,6 +170,7 @@ const ChartCard = () => {
               xAxisLabel="Day of the Month"
               dataKey="steps"
               yAxisTickFormatter={(value) => `${Math.round(value / 1000)}k`}
+              averageValue={monthAverage} // Pass calculated average
             />
           </Tabs.Content>
         </Tabs.Root>
