@@ -32,6 +32,7 @@ const BaseChart = ({
   dataKey,
   yAxisTickFormatter,
   averageValue,
+  today,
 }) => {
   // Control styles within the component
   const xAxisLineColor = '#444';
@@ -79,13 +80,30 @@ const BaseChart = ({
           fontSize: 14,
           fontWeight: 600,
           value: `${averageValue} steps`,
-          position: 'insideTopRight',
+          position: 'insideBottomRight',
           fill: referenceLineLabelColor,
         }}
         stroke={referenceLineColor}
         strokeWidth="0.5"
         strokeDasharray="4 2"
       />
+      {today ? (
+        <ReferenceLine
+          x="8 PM"
+          label={{
+            fontSize: 14,
+            fontWeight: 600,
+            value: `Now`,
+            position: 'insideTopLeft',
+            fill: referenceLineLabelColor,
+          }}
+          stroke={referenceLineColor}
+          strokeWidth="0.5"
+          strokeDasharray="4 2"
+        />
+      ) : (
+        ''
+      )}
     </BarChart>
   );
 };
