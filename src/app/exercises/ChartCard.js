@@ -4,6 +4,10 @@ import * as Tabs from '@radix-ui/react-tabs';
 import BaseChart from '@/app/exercises/ChartCard/BaseChart';
 
 // Utility function to calculate average
+const calculateTotal = (data) => {
+  const totalSteps = data.reduce((sum, item) => sum + item.steps, 0);
+  return totalSteps;
+};
 const calculateAverage = (data) => {
   const totalSteps = data.reduce((sum, item) => sum + item.steps, 0);
   return (totalSteps / data.length).toFixed(0);
@@ -11,30 +15,30 @@ const calculateAverage = (data) => {
 
 // Data for the "Day" chart (hourly data)
 const dayData = [
-  { hour: '12 AM', steps: 200 },
-  { hour: '1 AM', steps: 300 },
-  { hour: '2 AM', steps: 180 },
-  { hour: '3 AM', steps: 400 },
-  { hour: '4 AM', steps: 350 },
-  { hour: '5 AM', steps: 200 },
-  { hour: '6 AM', steps: 1200 },
+  { hour: '12 AM', steps: 0 },
+  { hour: '1 AM', steps: 0 },
+  { hour: '2 AM', steps: 0 },
+  { hour: '3 AM', steps: 0 },
+  { hour: '4 AM', steps: 0 },
+  { hour: '5 AM', steps: 0 },
+  { hour: '6 AM', steps: 50 },
   { hour: '7 AM', steps: 800 },
-  { hour: '8 AM', steps: 750 },
-  { hour: '9 AM', steps: 1000 },
-  { hour: '10 AM', steps: 2000 },
+  { hour: '8 AM', steps: 100 },
+  { hour: '9 AM', steps: 2300 },
+  { hour: '10 AM', steps: 100 },
   { hour: '11 AM', steps: 1500 },
   { hour: '12 PM', steps: 1900 },
   { hour: '1 PM', steps: 1400 },
-  { hour: '2 PM', steps: 1100 },
+  { hour: '2 PM', steps: 300 },
   { hour: '3 PM', steps: 900 },
-  { hour: '4 PM', steps: 1300 },
-  { hour: '5 PM', steps: 800 },
-  { hour: '6 PM', steps: 700 },
+  { hour: '4 PM', steps: 100 },
+  { hour: '5 PM', steps: 200 },
+  { hour: '6 PM', steps: 300 },
   { hour: '7 PM', steps: 650 },
-  { hour: '8 PM', steps: 500 },
-  { hour: '9 PM', steps: 600 },
-  { hour: '10 PM', steps: 400 },
-  { hour: '11 PM', steps: 300 },
+  { hour: '8 PM', steps: 800 },
+  { hour: '9 PM', steps: 50 },
+  { hour: '10 PM', steps: 50 },
+  { hour: '11 PM', steps: 0 },
 ];
 
 // Data for the "Week" chart (steps per day in a week)
@@ -49,10 +53,38 @@ const weekData = [
 ];
 
 // Data for the "Month" chart (steps per day in September)
-const monthData = Array.from({ length: 30 }, (v, i) => ({
-  day: `${i + 1} Sep`,
-  steps: Math.floor(Math.random() * 10000 + 5000), // Random steps between 5000 and 20000
-}));
+const monthData = [
+  { day: '1 Sep', steps: 11400 },
+  { day: '2 Sep', steps: 12200 },
+  { day: '3 Sep', steps: 12300 },
+  { day: '4 Sep', steps: 14100 },
+  { day: '5 Sep', steps: 13000 },
+  { day: '6 Sep', steps: 11300 },
+  { day: '7 Sep', steps: 13400 },
+  { day: '8 Sep', steps: 13500 },
+  { day: '9 Sep', steps: 12800 },
+  { day: '10 Sep', steps: 12200 },
+  { day: '11 Sep', steps: 15000 },
+  { day: '12 Sep', steps: 9800 },
+  { day: '13 Sep', steps: 9450 },
+  { day: '14 Sep', steps: 15800 },
+  { day: '15 Sep', steps: 12000 },
+  { day: '16 Sep', steps: 10500 },
+  { day: '17 Sep', steps: 11250 },
+  { day: '18 Sep', steps: 14900 },
+  { day: '19 Sep', steps: 12100 },
+  { day: '20 Sep', steps: 9000 },
+  { day: '21 Sep', steps: 11200 },
+  { day: '22 Sep', steps: 9200 },
+  { day: '23 Sep', steps: 8500 },
+  { day: '24 Sep', steps: 12000 },
+  { day: '25 Sep', steps: 8700 },
+  { day: '26 Sep', steps: 12600 },
+  { day: '27 Sep', steps: 14500 },
+  { day: '28 Sep', steps: 15900 },
+  { day: '29 Sep', steps: 9400 },
+  { day: '30 Sep', steps: 8800 },
+];
 
 const ChartHeader = ({ title, count }) => (
   <div className="flex flex-col gap-y-2">
@@ -88,7 +120,7 @@ const ChartCard = () => {
   }, []);
 
   // Calculate the average for day, week, and month data
-  const dayAverage = calculateAverage(dayData);
+  const dayTotal = calculateTotal(dayData);
   const weekAverage = calculateAverage(weekData);
   const monthAverage = calculateAverage(monthData);
 
@@ -133,7 +165,7 @@ const ChartCard = () => {
 
           {/* Rendering the relevant chart based on the selected tab */}
           <Tabs.Content value="day" className="py-8 text-zinc-700">
-            <ChartHeader title="Total today" count={9273} />
+            <ChartHeader title="Total today" count={dayTotal} />
             <BaseChart
               data={dayData}
               xAxisKey="hour"
@@ -146,7 +178,10 @@ const ChartCard = () => {
           </Tabs.Content>
 
           <Tabs.Content value="week" className="py-8 text-zinc-700">
-            <ChartHeader title="Daily average this week" count={14273} />
+            <ChartHeader
+              title="Daily average this week"
+              count={Number(weekAverage).toLocaleString()}
+            />
             <BaseChart
               data={weekData}
               xAxisKey="day"
@@ -160,7 +195,10 @@ const ChartCard = () => {
           </Tabs.Content>
 
           <Tabs.Content value="month" className="py-8 text-zinc-700">
-            <ChartHeader title="Daily average this month" count={12356} />
+            <ChartHeader
+              title="Daily average this month"
+              count={Number(monthAverage).toLocaleString()}
+            />
             <BaseChart
               data={monthData}
               xAxisKey="day"
