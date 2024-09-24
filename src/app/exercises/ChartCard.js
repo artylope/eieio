@@ -142,7 +142,6 @@ const ChartCard = () => {
               xAxisLabel="Hour"
               dataKey="steps"
               yAxisTickFormatter={(value) => `${(value / 1000).toFixed(1)}k`}
-              averageValue={dayAverage} // Pass calculated average
             />
           </Tabs.Content>
 
