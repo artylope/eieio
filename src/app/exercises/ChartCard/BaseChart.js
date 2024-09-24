@@ -83,6 +83,7 @@ const BaseChart = ({
           fill: referenceLineLabelColor,
         }}
         stroke={referenceLineColor}
+        strokeWidth="0.5"
         strokeDasharray="4 2"
       />
     </BarChart>
