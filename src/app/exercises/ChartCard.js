@@ -1,16 +1,6 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Tabs from '@radix-ui/react-tabs';
-import {
-  BarChart,
-  Bar,
-  CartesianGrid,
-  XAxis,
-  YAxis,
-  Tooltip,
-  Legend,
-  LabelList,
-} from 'recharts';
 import BaseChart from '@/app/exercises/ChartCard/BaseChart';
 
 // Data for the "Day" chart (hourly data)
@@ -63,10 +53,10 @@ const ChartHeader = ({ title, count }) => (
     <div className="">
       <div className="text-zinc-600">{title}</div>
       <div className="flex items-end justify-start gap-x-2">
-        <h1 className="text-6xl font-semibold tracking-tight text-zinc-900">
+        <h1 className="text-4xl font-semibold tracking-tight sm:text-6xl text-zinc-900">
           {count.toLocaleString()}
         </h1>
-        <span className="mb-0.5">steps</span>
+        <span className="mb-0.5 text-base sm:text-lg">steps</span>
       </div>
     </div>
   </div>
@@ -74,17 +64,35 @@ const ChartHeader = ({ title, count }) => (
 
 const ChartCard = () => {
   const [value, setValue] = useState('day'); // Default value is 'day'
+  const [chartWidth, setChartWidth] = useState(400); // Default chart width
+
+  // Dynamically adjust chart width based on screen size
+  useEffect(() => {
+    const handleResize = () => {
+      setChartWidth(window.innerWidth < 640 ? window.innerWidth - 40 : 400);
+    };
+
+    // Set initial width
+    handleResize();
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
-    <div className="flex items-center justify-center p-8">
-      <div className="bg-white border rounded-xl shadow-xl h-[36rem] w-[28rem] p-6">
-        <Tabs.Root value={value} onValueChange={setValue} className="">
+    <div className="flex items-center justify-center p-4 sm:p-8">
+      <div className="bg-white border rounded-xl shadow-xl h-[36rem] w-full sm:w-[28rem] p-6">
+        <Tabs.Root value={value} onValueChange={setValue}>
           <div className="flex items-center justify-between">
-            <h2 className="text-2xl font-semibold text-zinc-900">Steps</h2>
+            <h2 className="text-lg font-semibold sm:text-2xl text-zinc-900">
+              Steps
+            </h2>
             <Tabs.List className="flex justify-center p-1 transition-all bg-gray-100 rounded-lg w-fit">
               <Tabs.Trigger
                 value="day"
-                className={`px-3 py-1 text-center rounded-md leading-6 transition-all  ${
+                className={`px-2 py-1 sm:px-3 sm:py-1.5 text-center rounded-md leading-6 transition-all ${
                   value === 'day'
                     ? 'bg-white text-zinc-900 shadow'
                     : 'text-zinc-700'
@@ -93,7 +101,7 @@ const ChartCard = () => {
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="week"
-                className={`px-3 py-1 text-center rounded leading-6 transition-all  ${
+                className={`px-2 py-1 sm:px-3 sm:py-1.5 text-center rounded-md leading-6 transition-all ${
                   value === 'week'
                     ? 'bg-white text-zinc-900 shadow'
                     : 'text-zinc-700'
@@ -102,7 +110,7 @@ const ChartCard = () => {
               </Tabs.Trigger>
               <Tabs.Trigger
                 value="month"
-                className={`px-3 py-1 text-center rounded  leading-6 transition-all ${
+                className={`px-2 py-1 sm:px-3 sm:py-1.5 text-center rounded-md leading-6 transition-all ${
                   value === 'month'
                     ? 'bg-white text-zinc-900 shadow'
                     : 'text-zinc-700'
@@ -118,6 +126,7 @@ const ChartCard = () => {
             <BaseChart
               data={dayData}
               xAxisKey="hour"
+              chartWidth={chartWidth} // Pass responsive width
               yAxisLabel="Number of Steps"
               xAxisLabel="Hour"
               dataKey="steps"
@@ -130,6 +139,7 @@ const ChartCard = () => {
             <BaseChart
               data={weekData}
               xAxisKey="day"
+              chartWidth={chartWidth} // Pass responsive width
               yAxisLabel="Number of Steps"
               xAxisLabel="Day of the Week"
               dataKey="steps"
@@ -142,6 +152,7 @@ const ChartCard = () => {
             <BaseChart
               data={monthData}
               xAxisKey="day"
+              chartWidth={chartWidth} // Pass responsive width
               yAxisLabel="Number of Steps"
               xAxisLabel="Day of the Month"
               dataKey="steps"
