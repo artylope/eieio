@@ -7,7 +7,7 @@ import Logo from '@/image/eieio.svg';
 const Header = () => {
   return (
     <header className="bg-zinc-50 border-b">
-      <div className="container mx-auto py-16 flex flex-col gap-y-4 ">
+      <div className="container mx-auto pt-16 pb-8 lg:pb-12 flex flex-col gap-y-4 ">
         <div className="flex flex-col md:flex-row justify-between items-start grow gap-x-3">
           <div className="flex flex-col md:flex-row  justify-start items-start gap-x-6">
             <Image

@@ -41,7 +41,7 @@ const Template = ({ id, title, description, date, children, libraries }) => {
     <div
       id={`exercise${id}`}
       className="py-8 flex flex-col gap-y-6 justify-start items-start grow w-full ">
-      <div className="flex flex-col gap-y-3 w-full">
+      <div className="flex flex-col gap-y-2 w-full">
         <p className="font-semibold text-zinc-500 dark:text-zinc-400 uppercase text-xs tracking-wide">
           Exercise {id} <span className="ml-2 border-l px-2">{date}</span>
         </p>
