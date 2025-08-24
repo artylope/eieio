@@ -7,6 +7,7 @@ import TextHighlighter from '@/app/exercises/TextHighlighter';
 import AnimatedTextMessages from './exercises/AnimatedTextMessages';
 import CoolMenu from '@/app/exercises/CoolMenu';
 import ChartCard from '@/app/exercises/ChartCard';
+import AudioTranscriber from '@/app/exercises/AudioTranscriber';
 
 import Template from '@/app/exercises/Template';
 
@@ -128,6 +129,22 @@ const projects = [
       { name: 'Recharts', link: 'https://recharts.org/en-US/' },
     ],
     component: <ChartCard />,
+  },
+  {
+    id: '9',
+    date: '2025-08-24',
+    title: 'Record and transcribe audio',
+    description:
+      'Voice to text transcription with a cool UI',
+    libraries: [
+      { name: 'Tailwind', link: 'https://tailwindcss.com/' },
+      {
+        name: 'Radix Tabs',
+        link: 'https://www.radix-ui.com/primitives/docs/components/tabs',
+      },
+      { name: 'Recharts', link: 'https://recharts.org/en-US/' },
+    ],
+    component: <AudioTranscriber />,
   },
 ];
 
