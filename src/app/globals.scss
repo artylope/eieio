@@ -70,6 +70,7 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
@@ -78,8 +79,10 @@
 @layer components {
   .highlightable-text {
     user-select: text;
-    -webkit-user-select: text; /* Safari */
-    -webkit-touch-callout: none; /* Disable the default callout menu */
+    -webkit-user-select: text;
+    /* Safari */
+    -webkit-touch-callout: none;
+    /* Disable the default callout menu */
   }
 
   .custom-highlight {
@@ -101,14 +104,16 @@
     left: 8px;
     bottom: -8px;
     border-width: 10px 10px 0 0;
-    border-color: rgb(244 244 245) transparent transparent transparent; /* Adjust color to match the bg color */
+    border-color: rgb(244 244 245) transparent transparent transparent;
+    /* Adjust color to match the bg color */
   }
 
   .message-outgoing::before {
     right: 8px;
     bottom: -8px;
     border-width: 10px 0 0 10px;
-    border-color: rgb(134 239 172) transparent transparent transparent; /* Adjust color to match the reply bg color */
+    border-color: rgb(134 239 172) transparent transparent transparent;
+    /* Adjust color to match the reply bg color */
   }
 
   ::-webkit-scrollbar {
@@ -129,5 +134,19 @@
 
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-zinc-400;
+  }
+
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+
+    100% {
+      transform: translateX(-100%);
+    }
+  }
+
+  .animate-scroll-left {
+    animation: scroll-left linear infinite;
   }
 }

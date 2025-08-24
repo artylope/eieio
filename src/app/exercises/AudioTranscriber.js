@@ -2,12 +2,13 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { MicrophoneIcon, PlayIcon, PauseIcon } from '@heroicons/react/24/solid';
+import { motion } from 'framer-motion';
 
 // Individual clip component
 const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
     const [currentWordIndex, setCurrentWordIndex] = useState(-1);
-    const [audioBars] = useState(Array(20).fill(0).map(() => Math.random() * 80 + 20));
-    
+    const [audioBars] = useState(Array(clip.words.length * 3).fill(0).map(() => Math.random() * 80 + 20));
+
     useEffect(() => {
         if (isPlaying) {
             const wordInterval = setInterval(() => {
@@ -19,7 +20,7 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
                     return prev + 1;
                 });
             }, 400);
-            
+
             return () => clearInterval(wordInterval);
         } else {
             setCurrentWordIndex(-1);
@@ -32,39 +33,45 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
             <div className="flex items-center space-x-3 mb-3">
                 <button
                     onClick={onPlayPause}
-                    className="w-10 h-10 rounded-full bg-green-500 hover:bg-green-600 text-white flex items-center justify-center transition-all duration-300 shadow-sm"
+                    className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center transition-all duration-300 shadow-sm"
                 >
                     {isPlaying ? <PauseIcon className="w-4 h-4" /> : <PlayIcon className="w-4 h-4" />}
                 </button>
-                
+
                 {/* Audio bars */}
-                <div className="flex items-end justify-center space-x-1 h-8 flex-1">
-                    {audioBars.map((height, index) => (
-                        <div
-                            key={index}
-                            className={`w-1 rounded-full transition-all duration-150 ${
-                                isPlaying && index <= (currentWordIndex / clip.words.length) * 20
-                                    ? 'bg-green-500'
-                                    : 'bg-zinc-300'
+                <div className="flex items-center justify-start space-x-1 h-8 flex-1 overflow-hidden">
+                    <div
+                        className={`flex items-center space-x-1 transition-transform duration-300 ease-linear ${isPlaying ? 'animate-scroll-left' : ''
                             }`}
-                            style={{ height: `${Math.max(6, height * 0.25)}px` }}
-                        />
-                    ))}
+                        style={{
+                            animationDuration: `${clip.words.length * 0.4}s`
+                        }}
+                    >
+                        {audioBars.map((height, index) => (
+                            <div
+                                key={index}
+                                className={`w-1 flex-shrink-0 rounded-full transition-all duration-150 ${isPlaying && index <= (currentWordIndex / clip.words.length) * audioBars.length
+                                    ? 'bg-zinc-900'
+                                    : 'bg-zinc-300'
+                                    }`}
+                                style={{ height: `${Math.max(6, height * 0.25)}px` }}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
-            
+
             {/* Transcript with highlighting */}
             <div className="text-sm leading-relaxed text-zinc-700">
                 {clip.words.map((word, index) => (
                     <span
                         key={index}
-                        className={`transition-colors duration-200 ${
-                            index === currentWordIndex
-                                ? 'bg-yellow-300 text-black'
-                                : index < currentWordIndex
+                        className={`transition-colors duration-200 ${index === currentWordIndex
+                            ? 'bg-yellow-300 text-black'
+                            : index < currentWordIndex
                                 ? 'text-zinc-400'
                                 : 'text-zinc-700'
-                        }`}
+                            }`}
                     >
                         {word}{' '}
                     </span>
@@ -82,28 +89,21 @@ const AudioTranscriber = () => {
     const [activeBlobIndices, setActiveBlobIndices] = useState([0, 1, 2]);
     const intervalRef = useRef(null);
 
-    // 10 different organic blob shapes
-    const blobPaths = [
-        "M100,20 C140,25 175,60 170,100 C175,140 140,175 100,170 C60,175 25,140 30,100 C25,60 60,25 100,20 Z",
-        "M100,15 C145,20 180,55 175,100 C180,145 145,180 100,175 C55,180 20,145 25,100 C20,55 55,20 100,15 Z",
-        "M100,25 C135,30 165,65 160,100 C165,135 135,165 100,160 C65,165 35,135 40,100 C35,65 65,30 100,25 Z",
-        "M100,30 C130,20 170,50 175,100 C170,150 130,180 100,170 C70,180 30,150 25,100 C30,50 70,20 100,30 Z",
-        "M100,22 C142,28 172,62 168,100 C172,138 142,172 100,168 C58,172 28,138 32,100 C28,62 58,28 100,22 Z",
-        "M100,18 C138,15 185,58 180,100 C185,142 138,185 100,182 C62,185 15,142 20,100 C15,58 62,15 100,18 Z",
-        "M100,35 C125,25 155,55 165,100 C155,145 125,175 100,165 C75,175 45,145 35,100 C45,55 75,25 100,35 Z",
-        "M100,28 C132,22 178,68 172,100 C178,132 132,178 100,172 C68,178 22,132 28,100 C22,68 68,22 100,28 Z",
-        "M100,32 C128,35 165,72 160,100 C165,128 128,165 100,160 C72,165 35,128 40,100 C35,72 72,35 100,32 Z",
-        "M100,26 C134,24 176,66 174,100 C176,134 134,176 100,174 C66,176 24,134 26,100 C24,66 66,24 100,26 Z"
+    // 10 custom blob SVGs
+    const blobSvgs = [
+        '/audiotranscriber/blob_01.svg',
+        '/audiotranscriber/blob_02.svg',
+        '/audiotranscriber/blob_03.svg',
+        '/audiotranscriber/blob_04.svg',
+        '/audiotranscriber/blob_05.svg',
+        '/audiotranscriber/blob_06.svg',
+        '/audiotranscriber/blob_07.svg',
+        '/audiotranscriber/blob_08.svg',
+        '/audiotranscriber/blob_09.svg',
+        '/audiotranscriber/blob_10.svg'
     ];
 
-    // Gradient definitions
-    const gradients = [
-        { id: 'grad1', colors: ['#3B82F6', '#1D4ED8'] },
-        { id: 'grad2', colors: ['#60A5FA', '#2563EB'] },
-        { id: 'grad3', colors: ['#93C5FD', '#3B82F6'] },
-        { id: 'grad4', colors: ['#DBEAFE', '#60A5FA'] },
-        { id: 'grad5', colors: ['#1E40AF', '#3730A3'] }
-    ];
+    const [currentBlobIndex, setCurrentBlobIndex] = useState(0);
 
     // Sample sentences for different clips
     const sampleTexts = [
@@ -114,34 +114,30 @@ const AudioTranscriber = () => {
         "Innovation in renewable energy sources continues to accelerate at an unprecedented pace."
     ];
 
-    // Animate volume bars during recording and change blob patterns
+    // Animate volume bars and morph blobs during recording
     useEffect(() => {
         if (recordingState === 'recording') {
             intervalRef.current = setInterval(() => {
                 setVolumeBars(bars => bars.map(() => Math.random() * 100));
-                // Change active blobs every 2 seconds for more organic movement
-                if (Math.random() < 0.3) {
-                    setActiveBlobIndices([
-                        Math.floor(Math.random() * blobPaths.length),
-                        Math.floor(Math.random() * blobPaths.length),
-                        Math.floor(Math.random() * blobPaths.length)
-                    ]);
-                }
             }, 150);
+
+            // Morph blobs every 2-3 seconds
+            const morphInterval = setInterval(() => {
+                setCurrentBlobIndex(prev => (prev + 1) % blobSvgs.length);
+            }, 2500);
+
+            return () => {
+                clearInterval(intervalRef.current);
+                clearInterval(morphInterval);
+            };
         } else {
             if (intervalRef.current) {
                 clearInterval(intervalRef.current);
             }
             setVolumeBars(Array(8).fill(0));
-            setActiveBlobIndices([0, 1, 2]); // Reset to default
+            setCurrentBlobIndex(0); // Reset to first blob
         }
-
-        return () => {
-            if (intervalRef.current) {
-                clearInterval(intervalRef.current);
-            }
-        };
-    }, [recordingState, blobPaths.length]);
+    }, [recordingState, blobSvgs.length]);
 
     const handleMicClick = () => {
         if (recordingState === 'idle') {
@@ -203,34 +199,50 @@ const AudioTranscriber = () => {
                 {/* Animated blob background during recording */}
                 {recordingState === 'recording' && (
                     <div className="absolute -inset-16 pointer-events-none">
-                        <svg className="absolute inset-0 w-full h-full" viewBox="0 0 200 200">
-                            <defs>
-                                {gradients.map(grad => (
-                                    <radialGradient key={grad.id} id={grad.id} cx="50%" cy="50%" r="50%">
-                                        <stop offset="0%" stopColor={grad.colors[0]} />
-                                        <stop offset="100%" stopColor={grad.colors[1]} />
-                                    </radialGradient>
-                                ))}
-                            </defs>
-                            
-                            {/* Layer 1 - Largest, slowest */}
-                            <g className="opacity-15 animate-pulse" style={{ animationDuration: '4s', animationDelay: '0s' }}>
-                                <path d={blobPaths[activeBlobIndices[0]]} fill={`url(#${gradients[0].id})`} 
-                                      transform="scale(1.2) translate(-20, -20)" />
-                            </g>
-                            
-                            {/* Layer 2 - Medium, medium speed */}
-                            <g className="opacity-20 animate-ping" style={{ animationDuration: '3s', animationDelay: '0.5s' }}>
-                                <path d={blobPaths[activeBlobIndices[1]]} fill={`url(#${gradients[1].id})`} 
-                                      transform="scale(1.0) translate(0, 0)" />
-                            </g>
-                            
-                            {/* Layer 3 - Smallest, fastest */}
-                            <g className="opacity-25 animate-bounce" style={{ animationDuration: '2s', animationDelay: '1s' }}>
-                                <path d={blobPaths[activeBlobIndices[2]]} fill={`url(#${gradients[2].id})`} 
-                                      transform="scale(0.8) translate(25, 25)" />
-                            </g>
-                        </svg>
+                        {/* Layer 1 - Background blob */}
+                        <motion.div className="absolute inset-0 opacity-20">
+                            <motion.img
+                                key={`layer1-${currentBlobIndex}`}
+                                src={blobSvgs[currentBlobIndex]}
+                                alt=""
+                                className="w-full h-full object-contain animate-pulse"
+                                style={{ animationDuration: '4s' }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1.5, ease: "easeInOut" }}
+                            />
+                        </motion.div>
+
+                        {/* Layer 2 - Middle blob */}
+                        <motion.div className="absolute inset-0 opacity-30">
+                            <motion.img
+                                key={`layer2-${currentBlobIndex}`}
+                                src={blobSvgs[(currentBlobIndex + 1) % blobSvgs.length]}
+                                alt=""
+                                className="w-full h-full object-contain animate-ping"
+                                style={{ animationDuration: '3s' }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 1.2, ease: "easeInOut" }}
+                            />
+                        </motion.div>
+
+                        {/* Layer 3 - Front blob */}
+                        <motion.div className="absolute inset-0 opacity-40">
+                            <motion.img
+                                key={`layer3-${currentBlobIndex}`}
+                                src={blobSvgs[(currentBlobIndex + 2) % blobSvgs.length]}
+                                alt=""
+                                className="w-full h-full object-contain animate-bounce"
+                                style={{ animationDuration: '2s' }}
+                                initial={{ opacity: 0 }}
+                                animate={{ opacity: 1 }}
+                                exit={{ opacity: 0 }}
+                                transition={{ duration: 0.8, ease: "easeInOut" }}
+                            />
+                        </motion.div>
                     </div>
                 )}
 
@@ -240,13 +252,12 @@ const AudioTranscriber = () => {
                     <button
                         onClick={handleMicClick}
                         disabled={recordingState === 'transcribing'}
-                        className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${
-                            recordingState === 'recording'
-                                ? 'bg-red-500 hover:bg-red-600 scale-110'
-                                : recordingState === 'transcribing'
+                        className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${recordingState === 'recording'
+                            ? 'bg-red-500 hover:bg-red-600 scale-110'
+                            : recordingState === 'transcribing'
                                 ? 'bg-zinc-400 cursor-not-allowed'
                                 : 'bg-blue-500 hover:bg-blue-600'
-                        } text-white shadow-lg`}
+                            } text-white shadow-lg`}
                     >
                         <MicrophoneIcon className="w-7 h-7" />
                     </button>
