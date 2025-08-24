@@ -31,20 +31,24 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
         <div className="bg-white rounded-lg p-4 shadow-sm border border-zinc-200 w-full max-w-md mb-3">
             {/* Play button and audio bars */}
             <div className="flex items-center space-x-3 mb-3">
-                <button
-                    onClick={onPlayPause}
-                    className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center transition-all duration-300 shadow-sm"
-                >
-                    {isPlaying ? <PauseIcon className="w-4 h-4" /> : <PlayIcon className="w-4 h-4" />}
-                </button>
+                <div>
+                    <button
+                        onClick={onPlayPause}
+                        className="w-10 h-10 rounded-full bg-zinc-900 hover:bg-zinc-800 text-white flex items-center justify-center transition-all duration-300 shadow-sm"
+                    >
+                        {isPlaying ? <PauseIcon className="w-4 h-4" /> : <PlayIcon className="w-4 h-4" />}
+                    </button>
+                </div>
+
 
                 {/* Audio bars */}
-                <div className="flex items-center justify-start space-x-1 h-8 flex-1 overflow-hidden">
+                <div className="flex items-center justify-start space-x-1 h-12 flex-1 overflow-hidden">
                     <div
                         className={`flex items-center space-x-1 transition-transform duration-300 ease-linear ${isPlaying ? 'animate-scroll-left' : ''
                             }`}
                         style={{
-                            animationDuration: `${clip.words.length * 0.4}s`
+                            animationDuration: `${clip.words.length * 0.4}s`,
+                            animationDelay: '2s'
                         }}
                     >
                         {audioBars.map((height, index) => (
@@ -54,7 +58,7 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
                                     ? 'bg-zinc-900'
                                     : 'bg-zinc-300'
                                     }`}
-                                style={{ height: `${Math.max(6, height * 0.25)}px` }}
+                                style={{ height: `${Math.max(0, height * 0.33)}px` }}
                             />
                         ))}
                     </div>
@@ -252,14 +256,14 @@ const AudioTranscriber = () => {
                     <button
                         onClick={handleMicClick}
                         disabled={recordingState === 'transcribing'}
-                        className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${recordingState === 'recording'
+                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${recordingState === 'recording'
                             ? 'bg-red-500 hover:bg-red-600 scale-110'
                             : recordingState === 'transcribing'
                                 ? 'bg-zinc-400 cursor-not-allowed'
-                                : 'bg-blue-500 hover:bg-blue-600'
+                                : 'bg-zinc-900 hover:bg-zinc-800'
                             } text-white shadow-lg`}
                     >
-                        <MicrophoneIcon className="w-7 h-7" />
+                        <MicrophoneIcon className="w-5 h-5" />
                     </button>
 
                     {/* Volume bars during recording */}
