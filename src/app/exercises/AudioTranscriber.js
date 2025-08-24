@@ -28,7 +28,7 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
     }, [isPlaying, clip.words.length, onPlayPause]);
 
     return (
-        <div className="bg-white rounded-lg p-4 shadow-sm border border-zinc-200 w-full max-w-md mb-3">
+        <div className="bg-white rounded-2xl p-4 shadow-sm border border-zinc-200 w-full max-w-md mb-3">
             {/* Play button and audio bars */}
             <div className="flex items-center space-x-3 mb-3">
                 <div>
@@ -70,8 +70,8 @@ const AudioClip = ({ clip, isPlaying, onPlayPause }) => {
                 {clip.words.map((word, index) => (
                     <span
                         key={index}
-                        className={`transition-colors duration-200 ${index === currentWordIndex
-                            ? 'bg-yellow-300 text-black'
+                        className={`rounded-sm outline outline-transparent outline-1 ${index === currentWordIndex
+                            ? 'bg-zinc-900 text-white outline-zinc-900 '
                             : index < currentWordIndex
                                 ? 'text-zinc-400'
                                 : 'text-zinc-700'
@@ -200,84 +200,88 @@ const AudioTranscriber = () => {
 
             {/* Recording section */}
             <div className="relative">
-                {/* Animated blob background during recording */}
-                {recordingState === 'recording' && (
-                    <div className="absolute -inset-16 pointer-events-none">
-                        {/* Layer 1 - Background blob */}
-                        <motion.div className="absolute inset-0 opacity-20">
-                            <motion.img
-                                key={`layer1-${currentBlobIndex}`}
-                                src={blobSvgs[currentBlobIndex]}
-                                alt=""
-                                className="w-full h-full object-contain animate-pulse"
-                                style={{ animationDuration: '4s' }}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 1.5, ease: "easeInOut" }}
-                            />
-                        </motion.div>
-
-                        {/* Layer 2 - Middle blob */}
-                        <motion.div className="absolute inset-0 opacity-30">
-                            <motion.img
-                                key={`layer2-${currentBlobIndex}`}
-                                src={blobSvgs[(currentBlobIndex + 1) % blobSvgs.length]}
-                                alt=""
-                                className="w-full h-full object-contain animate-ping"
-                                style={{ animationDuration: '3s' }}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 1.2, ease: "easeInOut" }}
-                            />
-                        </motion.div>
-
-                        {/* Layer 3 - Front blob */}
-                        <motion.div className="absolute inset-0 opacity-40">
-                            <motion.img
-                                key={`layer3-${currentBlobIndex}`}
-                                src={blobSvgs[(currentBlobIndex + 2) % blobSvgs.length]}
-                                alt=""
-                                className="w-full h-full object-contain animate-bounce"
-                                style={{ animationDuration: '2s' }}
-                                initial={{ opacity: 0 }}
-                                animate={{ opacity: 1 }}
-                                exit={{ opacity: 0 }}
-                                transition={{ duration: 0.8, ease: "easeInOut" }}
-                            />
-                        </motion.div>
-                    </div>
-                )}
-
                 {/* Main button container */}
-                <div className="relative z-10 flex flex-col items-center">
-                    {/* Recording/Mic Button */}
-                    <button
-                        onClick={handleMicClick}
-                        disabled={recordingState === 'transcribing'}
-                        className={`w-12 h-12 rounded-full flex items-center justify-center transition-all duration-300 ${recordingState === 'recording'
-                            ? 'bg-red-500 hover:bg-red-600 scale-110'
-                            : recordingState === 'transcribing'
-                                ? 'bg-zinc-400 cursor-not-allowed'
-                                : 'bg-zinc-900 hover:bg-zinc-800'
-                            } text-white shadow-lg`}
-                    >
-                        <MicrophoneIcon className="w-5 h-5" />
-                    </button>
-
-                    {/* Volume bars during recording */}
+                <div className="relative flex flex-col items-center">
+                    {/* Animated blob background behind button - only visible during recording */}
                     {recordingState === 'recording' && (
-                        <div className="flex items-end justify-center space-x-1 mt-4 h-12">
-                            {volumeBars.map((height, index) => (
-                                <div
-                                    key={index}
-                                    className="w-2 bg-blue-500 rounded-t transition-all duration-150"
-                                    style={{ height: `${Math.max(4, height * 0.4)}px` }}
+                        <div className="absolute inset-0 -m-20 pointer-events-none">
+                            {/* Layer 1 - Background blob */}
+                            <motion.div className="absolute inset-0 opacity-15">
+                                <motion.img
+                                    key={`layer1-${currentBlobIndex}`}
+                                    src={blobSvgs[currentBlobIndex]}
+                                    alt=""
+                                    className="w-full h-full object-contain animate-pulse"
+                                    style={{ animationDuration: '4s' }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 1.5, ease: "easeInOut" }}
                                 />
-                            ))}
+                            </motion.div>
+
+                            {/* Layer 2 - Middle blob */}
+                            <motion.div className="absolute inset-0 opacity-25">
+                                <motion.img
+                                    key={`layer2-${currentBlobIndex}`}
+                                    src={blobSvgs[(currentBlobIndex + 1) % blobSvgs.length]}
+                                    alt=""
+                                    className="w-full h-full object-contain animate-ping"
+                                    style={{ animationDuration: '3s' }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 1.2, ease: "easeInOut" }}
+                                />
+                            </motion.div>
+
+                            {/* Layer 3 - Front blob */}
+                            <motion.div className="absolute inset-0 opacity-35">
+                                <motion.img
+                                    key={`layer3-${currentBlobIndex}`}
+                                    src={blobSvgs[(currentBlobIndex + 2) % blobSvgs.length]}
+                                    alt=""
+                                    className="w-full h-full object-contain animate-bounce"
+                                    style={{ animationDuration: '2s' }}
+                                    initial={{ opacity: 0 }}
+                                    animate={{ opacity: 1 }}
+                                    exit={{ opacity: 0 }}
+                                    transition={{ duration: 0.8, ease: "easeInOut" }}
+                                />
+                            </motion.div>
                         </div>
                     )}
+
+                    {/* Recording/Mic Button with volume bars inside */}
+                    <div className="relative z-10">
+                        <button
+                            onClick={handleMicClick}
+                            disabled={recordingState === 'transcribing'}
+                            className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 relative overflow-hidden ${recordingState === 'recording'
+                                ? 'bg-red-500 hover:bg-red-600 scale-110'
+                                : recordingState === 'transcribing'
+                                    ? 'bg-zinc-400 cursor-not-allowed'
+                                    : 'bg-zinc-900 hover:bg-zinc-800'
+                                } text-white shadow-lg`}
+                        >
+                            {/* Volume bars inside the button during recording */}
+                            {recordingState === 'recording' && (
+                                <div className="absolute inset-0 flex items-center justify-center opacity-30">
+                                    <div className="flex items-end justify-center space-x-1 h-8">
+                                        {volumeBars.map((height, index) => (
+                                            <div
+                                                key={index}
+                                                className="w-1 bg-white rounded-full transition-all duration-150"
+                                                style={{ height: `${Math.max(4, height * 0.3)}px` }}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+
+                            <MicrophoneIcon className="w-7 h-7 relative z-10" />
+                        </button>
+                    </div>
                 </div>
             </div>
 
