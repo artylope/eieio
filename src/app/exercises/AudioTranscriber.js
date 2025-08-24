@@ -211,8 +211,7 @@ const AudioTranscriber = () => {
                                     key={`layer1-${currentBlobIndex}`}
                                     src={blobSvgs[currentBlobIndex]}
                                     alt=""
-                                    className="w-full h-full object-contain animate-pulse"
-                                    style={{ animationDuration: '4s' }}
+                                    className="w-full h-full object-contain"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
@@ -226,8 +225,7 @@ const AudioTranscriber = () => {
                                     key={`layer2-${currentBlobIndex}`}
                                     src={blobSvgs[(currentBlobIndex + 1) % blobSvgs.length]}
                                     alt=""
-                                    className="w-full h-full object-contain animate-ping"
-                                    style={{ animationDuration: '3s' }}
+                                    className="w-full h-full object-contain"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
@@ -241,8 +239,7 @@ const AudioTranscriber = () => {
                                     key={`layer3-${currentBlobIndex}`}
                                     src={blobSvgs[(currentBlobIndex + 2) % blobSvgs.length]}
                                     alt=""
-                                    className="w-full h-full object-contain animate-bounce"
-                                    style={{ animationDuration: '2s' }}
+                                    className="w-full h-full object-contain"
                                     initial={{ opacity: 0 }}
                                     animate={{ opacity: 1 }}
                                     exit={{ opacity: 0 }}
